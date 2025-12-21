@@ -1,6 +1,6 @@
 import { Environment } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { useRef, useState, type RefObject } from "react";
+import { useEffect, useRef, useState, type RefObject } from "react";
 import * as THREE from "three";
 import CameraController from "../components/CameraController";
 import Computer from "../components/Computer";
@@ -16,10 +16,16 @@ interface CameraView {
   lookAt: THREE.Vector3;
 }
 
-function Desk() {
+function Desk({
+  onCameraMoved,
+  resetSignal,
+}: {
+  onCameraMoved: (moved: boolean) => void;
+  resetSignal: number;
+}) {
   const [view, setView] = useState<CameraView>({
-    position: DEFAULT_POS,
-    lookAt: DEFAULT_LOOK_AT,
+    position: DEFAULT_POS.clone(),
+    lookAt: DEFAULT_LOOK_AT.clone(),
   });
   const donutRef = useRef<THREE.Object3D>(null!);
 
@@ -30,9 +36,24 @@ function Desk() {
         ref.current.position.y + 5,
         ref.current.position.z + 10
       ),
-      lookAt: ref.current.position,
+      lookAt: ref.current.position.clone(),
     });
   };
+
+  useEffect(() => {
+    setView({
+      position: DEFAULT_POS.clone(),
+      lookAt: DEFAULT_LOOK_AT.clone(),
+    });
+  }, [resetSignal]);
+
+  useEffect(() => {
+    const moved =
+      view.position.distanceTo(DEFAULT_POS) > 0.1 ||
+      view.lookAt.distanceTo(DEFAULT_LOOK_AT) > 0.1;
+
+    onCameraMoved(moved);
+  }, [view, onCameraMoved]);
 
   return (
     <Canvas shadows>
@@ -46,7 +67,7 @@ function Desk() {
       <Computer />
 
       <DonutModel
-        position={[-5, 2, 0]}
+        position={[-3, 0, -1]}
         scale={0.2}
         ref={donutRef}
         onClick={() => focusOn(donutRef)}
