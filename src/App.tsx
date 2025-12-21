@@ -1,10 +1,10 @@
-import Scene from "./scenes/Scene";
+import Desk from "./scenes/Desk";
 
 function App() {
   return (
     <main className="relative">
       <section className="w-full h-screen">
-        <Scene />
+        <Desk />
       </section>
       <footer className="absolute left-1/2 transform -translate-x-1/2 bottom-10 p-4">
         <ul className="flex flex-row gap-3">
