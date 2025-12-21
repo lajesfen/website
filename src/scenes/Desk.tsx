@@ -7,7 +7,6 @@ import Computer from "../components/Computer";
 import Ground from "../components/Ground";
 import Lights from "../components/Lights";
 import { DonutModel } from "../models/DonutModel";
-import { GooseModel } from "../models/GooseModel";
 
 const DEFAULT_POS = new THREE.Vector3(-5, 8, 15.2);
 const DEFAULT_LOOK_AT = new THREE.Vector3(0, 1.5, 0);
@@ -23,7 +22,6 @@ function Desk() {
     lookAt: DEFAULT_LOOK_AT,
   });
   const donutRef = useRef<THREE.Object3D>(null!);
-  const gooseRef = useRef<THREE.Object3D>(null!);
 
   const focusOn = (ref: RefObject<THREE.Object3D>) => {
     setView({
@@ -46,12 +44,6 @@ function Desk() {
       <Environment files={"/assets/environment/studio_small_08_1k.hdr"} />
       <Lights />
       <Computer />
-
-      <GooseModel
-        position={[3, 2, 0]}
-        ref={gooseRef}
-        onClick={() => focusOn(gooseRef)}
-      />
 
       <DonutModel
         position={[-5, 2, 0]}
