@@ -14,7 +14,7 @@ export function DonutModel(props) {
                 geometry={nodes.Torus.geometry}
                 material={nodes.Torus.material}
             >
-                <Outlines thickness={10} color="hotpink" />
+                <Outlines thickness={10} color="#1E4BF5" />
             </mesh>
         </group>
     )
