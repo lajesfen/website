@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: 'Monument';
-  src: url('/assets/fonts/MonumentExtended-Regular.otf') format('opentype');
+  font-family: 'Akira';
+  src: url('/assets/fonts/AkiraExpanded.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
