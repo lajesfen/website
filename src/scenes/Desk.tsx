@@ -1,11 +1,12 @@
 import { Environment } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { useEffect, useRef, useState, type RefObject } from "react";
+import { useRef, useState, type RefObject } from "react";
 import * as THREE from "three";
-import CameraController from "../components/CameraController";
-import Computer from "../components/Computer";
-import Ground from "../components/Ground";
-import Lights from "../components/Lights";
+import CameraController from "../components/desk/CameraController";
+import Computer from "../components/desk/Computer";
+import Ground from "../components/desk/Ground";
+import Lights from "../components/desk/Lights";
+import SelectableObject from "../components/desk/SelectableObject";
 import { DonutModel } from "../models/DonutModel";
 
 const DEFAULT_POS = new THREE.Vector3(-5, 8, 15.2);
@@ -17,11 +18,11 @@ interface CameraView {
 }
 
 function Desk({
-  onCameraMoved,
-  resetSignal,
+  focusedId,
+  setFocusedId,
 }: {
-  onCameraMoved: (moved: boolean) => void;
-  resetSignal: number;
+  focusedId: string | null;
+  setFocusedId: (id: string | null) => void;
 }) {
   const [view, setView] = useState<CameraView>({
     position: DEFAULT_POS.clone(),
@@ -29,31 +30,25 @@ function Desk({
   });
   const donutRef = useRef<THREE.Object3D>(null!);
 
-  const focusOn = (ref: RefObject<THREE.Object3D>) => {
-    setView({
-      position: new THREE.Vector3(
-        ref.current.position.x,
-        ref.current.position.y + 5,
-        ref.current.position.z + 10
-      ),
-      lookAt: ref.current.position.clone(),
-    });
+  const focusOn = (id: string, ref: RefObject<THREE.Object3D>) => {
+    if (focusedId == null) {
+      setView({
+        position: new THREE.Vector3(
+          ref.current.position.x,
+          ref.current.position.y + 5,
+          ref.current.position.z + 10
+        ),
+        lookAt: ref.current.position.clone(),
+      });
+      setFocusedId(id);
+    } else {
+      setView({
+        position: DEFAULT_POS.clone(),
+        lookAt: DEFAULT_LOOK_AT.clone(),
+      });
+      setFocusedId(null);
+    }
   };
-
-  useEffect(() => {
-    setView({
-      position: DEFAULT_POS.clone(),
-      lookAt: DEFAULT_LOOK_AT.clone(),
-    });
-  }, [resetSignal]);
-
-  useEffect(() => {
-    const moved =
-      view.position.distanceTo(DEFAULT_POS) > 0.1 ||
-      view.lookAt.distanceTo(DEFAULT_LOOK_AT) > 0.1;
-
-    onCameraMoved(moved);
-  }, [view, onCameraMoved]);
 
   return (
     <Canvas shadows>
@@ -66,11 +61,12 @@ function Desk({
       <Lights />
       <Computer />
 
-      <DonutModel
+      <SelectableObject
+        component={DonutModel}
         position={[-3, 0, -1]}
         scale={0.2}
         ref={donutRef}
-        onClick={() => focusOn(donutRef)}
+        onClick={() => focusOn("donut", donutRef)}
       />
 
       <Ground />

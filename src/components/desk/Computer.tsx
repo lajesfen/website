@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
-import { ComputerModel } from "../models/ComputerModel";
+import { ComputerModel } from "../../models/ComputerModel";
 
 const KeyboardKeys = {
   Escape: "Key_Esc",

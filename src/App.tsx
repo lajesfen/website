@@ -1,48 +1,63 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef, useState } from "react";
+import IconURL from "./components/IconURL";
+import ProjectCard from "./components/ProjectCard";
 import Desk from "./scenes/Desk";
 
 gsap.registerPlugin(useGSAP);
 
+const data = {
+  donut: {
+    title: "*Beep Boop*",
+    description:
+      "Hey there! This personal website is still a WIP, but you can preview how each project will be displayed once finished :)",
+    url: "https://github.com/lajesfen/website",
+    source: "https://github.com/lajesfen/website",
+  },
+};
+
 function App() {
-  const [cameraMoved, setCameraMoved] = useState(false);
-  const [resetSignal, setResetSignal] = useState(0);
-  const resetCamRef = useRef(null);
+  const [focusedId, setFocusedId] = useState<string | null>(null);
+  const cardRef = useRef(null);
 
   useGSAP(
     () => {
-      if (!resetCamRef.current) return;
-
-      gsap.fromTo(
-        resetCamRef.current,
-        { y: 20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" }
-      );
+      if (focusedId && cardRef.current) {
+        gsap.fromTo(
+          cardRef.current,
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" }
+        );
+      }
     },
-    { dependencies: [cameraMoved] }
+    { dependencies: [focusedId] }
   );
+
+  const currentProject = focusedId
+    ? data[focusedId as keyof typeof data]
+    : null;
 
   return (
     <main className="relative">
       <section className="w-full h-screen">
-        <Desk onCameraMoved={setCameraMoved} resetSignal={resetSignal} />
+        <Desk focusedId={focusedId} setFocusedId={setFocusedId} />
       </section>
 
-      <footer className="absolute left-1/2 -translate-x-1/2 bottom-14 p-2 grid place-items-center">
-        {cameraMoved && (
-          <div
-            onClick={() => setResetSignal((s) => s + 1)}
-            className="my-2 p-2 cursor-pointer text-center text-xs text-[#1E4BF5] font-[Monument]"
-            ref={resetCamRef}
-          >
-            Reset camera
-          </div>
+      <footer className="w-full max-w-90 flex flex-col gap-8 absolute left-1/2 -translate-x-1/2 bottom-14 p-2 place-items-center">
+        {currentProject && (
+          <ProjectCard
+            title={currentProject.title}
+            description={currentProject.description}
+            url={currentProject.url}
+            source={currentProject.source}
+            ref={cardRef}
+          />
         )}
         <ul className="flex flex-row gap-3">
-          <SocialLink href="mailto:lajesfen@gmail.com" icon="email" />
-          <SocialLink href="https://github.com/lajesfen" icon="github" />
-          <SocialLink
+          <IconURL href="mailto:lajesfen@gmail.com" icon="email" />
+          <IconURL href="https://github.com/lajesfen" icon="github" />
+          <IconURL
             href="https://www.linkedin.com/in/luciano-aguirre-jesfen/"
             icon="linkedin"
           />
@@ -51,11 +66,5 @@ function App() {
     </main>
   );
 }
-
-const SocialLink = ({ href, icon }: { href: string; icon: string }) => (
-  <a href={href} target="_blank" rel="noopener noreferrer">
-    <img src={`./assets/icons/${icon}.svg`} width={32} height={32} alt={icon} />
-  </a>
-);
 
 export default App;
