@@ -20,6 +20,15 @@ export function ComputerModel(props) {
           />
           <group name="Monitor" position={[0, 1.25, -0.755]} rotation={[0.131, 0, 0]}>
             <mesh
+              name="Button"
+              castShadow
+              receiveShadow
+              geometry={nodes.Button.geometry}
+              material={nodes.Button.material}
+              position={[-0.83, -0.054, -0.589]}
+              rotation={[3.011, 0, -Math.PI]}
+            />
+            <mesh
               name="MonitorBase"
               castShadow
               receiveShadow
@@ -34,13 +43,7 @@ export function ComputerModel(props) {
               geometry={nodes.Screen.geometry}
               material={materials.WhiteMaterial}
               position={[0, 1.005, -0.495]}
-            >
-              {/* <Html rotation-y={Math.PI} transform>
-                <div className='text-[#1E4BF5] font-[Akira] items-center text-center'>
-                  WIP
-                </div>
-              </Html> */}
-            </mesh>
+            />
           </group>
         </group>
         <group name="Keyboard" position={[0.725, 0, -0.874]} rotation={[0, -0.087, 0]}>
