@@ -11,9 +11,16 @@ const data = {
   donut: {
     title: "*Beep Boop*",
     description:
-      "Hey there! This personal website is still a WIP, but you can preview how each project will be displayed once finished :)",
-    url: "https://github.com/lajesfen/website",
-    source: "https://github.com/lajesfen/website",
+      "Hey there! This personal website is still a WIP, there might be some visual bugs but you can preview how each project will be displayed once complete :)",
+    url: "",
+    source: "",
+  },
+  hca: {
+    title: "Huesos, Camara, Accion",
+    description:
+      "Web application that captures human poses in real time from a webcam and applies them to 3D characters using MediaPipe pose detection [Next.js, Three.js, R3F].",
+    url: "https://cs4016-motion-transfer.vercel.app/",
+    source: "https://github.com/lajesfen/CS4016-motion-transfer",
   },
 };
 

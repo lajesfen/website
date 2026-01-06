@@ -8,6 +8,7 @@ import Ground from "../components/desk/Ground";
 import Lights from "../components/desk/Lights";
 import SelectableObject from "../components/desk/SelectableObject";
 import { DonutModel } from "../models/DonutModel";
+import { HCAModel } from "../models/HCAModel";
 
 const DEFAULT_POS = new THREE.Vector3(-5, 8, 15.2);
 const DEFAULT_LOOK_AT = new THREE.Vector3(0, 1.5, 0);
@@ -29,6 +30,7 @@ function Desk({
     lookAt: DEFAULT_LOOK_AT.clone(),
   });
   const donutRef = useRef<THREE.Object3D>(null!);
+  const lcaRef = useRef<THREE.Object3D>(null!);
 
   const focusOn = (id: string, ref: RefObject<THREE.Object3D>) => {
     if (focusedId == null) {
@@ -36,7 +38,7 @@ function Desk({
         position: new THREE.Vector3(
           ref.current.position.x,
           ref.current.position.y + 5,
-          ref.current.position.z + 10
+          ref.current.position.z + 8
         ),
         lookAt: ref.current.position.clone(),
       });
@@ -71,6 +73,16 @@ function Desk({
         ref={donutRef}
         focused={focusedId == "donut"}
         onClick={() => focusOn("donut", donutRef)}
+      />
+
+      <SelectableObject
+        component={HCAModel}
+        position={[4, 0, -2]}
+        rotation={[0, -0.5, 0]}
+        scale={1}
+        ref={lcaRef}
+        focused={focusedId == "hca"}
+        onClick={() => focusOn("hca", lcaRef)}
       />
 
       <Ground />
