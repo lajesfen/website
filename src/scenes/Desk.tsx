@@ -1,6 +1,6 @@
 import { Environment } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { useRef, useState, type RefObject } from "react";
+import { Suspense, useRef, useState, type RefObject } from "react";
 import * as THREE from "three";
 import CameraController from "../components/desk/CameraController";
 import Computer from "../components/desk/Computer";
@@ -59,7 +59,10 @@ function Desk({
 
       <Environment files={"/assets/environment/studio_small_08_1k.hdr"} />
       <Lights />
-      <Computer />
+
+      <Suspense fallback={null}>
+        <Computer />
+      </Suspense>
 
       <SelectableObject
         component={DonutModel}
