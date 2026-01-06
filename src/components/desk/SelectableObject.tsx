@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function SelectableObject({ component: Model, ...props }: any) {
+function SelectableObject({ component: Model, focused, ...props }: any) {
   const [hover, setHover] = useState(false);
 
   return (
@@ -12,7 +12,7 @@ function SelectableObject({ component: Model, ...props }: any) {
       }}
       onPointerOut={() => setHover(false)}
     >
-      <Model hover={hover} />
+      <Model hover={focused || hover} />
     </group>
   );
 }

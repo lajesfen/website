@@ -69,6 +69,7 @@ function Desk({
         position={[-3, 0, -1]}
         scale={0.2}
         ref={donutRef}
+        focused={focusedId == "donut"}
         onClick={() => focusOn("donut", donutRef)}
       />
 
