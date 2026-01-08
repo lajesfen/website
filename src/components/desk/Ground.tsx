@@ -6,7 +6,7 @@ function Ground() {
       receiveShadow={true}
     >
       <planeGeometry />
-      <shadowMaterial opacity={0.2} />
+      <shadowMaterial opacity={0.17} />
     </mesh>
   );
 }
