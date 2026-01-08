@@ -22,6 +22,13 @@ const data = {
     url: "https://cs4016-motion-transfer.vercel.app/",
     source: "https://github.com/lajesfen/CS4016-motion-transfer",
   },
+  go: {
+    title: "Go -> x86 Compiler",
+    description:
+      "Compiler implemented in C++ that translates Go source code into x86 assembly, featuring lexical analysis, parsing, and code generation for low-level execution [Python, C++].",
+    url: "",
+    source: "https://github.com/lestorialqs/compi_go",
+  },
 };
 
 function App() {

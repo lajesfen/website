@@ -8,6 +8,7 @@ import Ground from "../components/desk/Ground";
 import Lights from "../components/desk/Lights";
 import SelectableObject from "../components/desk/SelectableObject";
 import { DonutModel } from "../models/DonutModel";
+import { GoModel } from "../models/GoModel";
 import { HCAModel } from "../models/HCAModel";
 
 const DEFAULT_POS = new THREE.Vector3(-5, 8, 15.2);
@@ -31,6 +32,7 @@ function Desk({
   });
   const donutRef = useRef<THREE.Object3D>(null!);
   const lcaRef = useRef<THREE.Object3D>(null!);
+  const goRef = useRef<THREE.Object3D>(null!);
 
   const focusOn = (id: string, ref: RefObject<THREE.Object3D>) => {
     if (focusedId == null) {
@@ -83,6 +85,16 @@ function Desk({
         ref={lcaRef}
         focused={focusedId == "hca"}
         onClick={() => focusOn("hca", lcaRef)}
+      />
+
+      <SelectableObject
+        component={GoModel}
+        position={[-2, 0, -6]}
+        rotation={[0, 0, 0]}
+        scale={1}
+        ref={goRef}
+        focused={focusedId == "go"}
+        onClick={() => focusOn("go", goRef)}
       />
 
       <Ground />
