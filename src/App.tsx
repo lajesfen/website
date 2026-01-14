@@ -16,7 +16,7 @@ const data = {
     source: "",
   },
   hca: {
-    title: "Huesos, Camara, Accion",
+    title: "Bones, Camera, Action",
     description:
       "Web application that captures human poses in real time from a webcam and applies them to 3D characters using MediaPipe pose detection [Three.js, R3F, Next.js].",
     url: "https://cs4016-motion-transfer.vercel.app/",
@@ -28,6 +28,20 @@ const data = {
       "Compiler implemented in C++ that translates Go source code into x86 assembly, featuring lexical analysis, parsing, and code generation for low-level execution [C++, Python].",
     url: "",
     source: "https://github.com/lestorialqs/compi_go",
+  },
+  pokemaps: {
+    title: "PokeMaps",
+    description:
+      "React Native app that uses an interactive map to spawn Pokémon in real-world locations, allowing users to catch them by tapping on markers while fetching names and icons from the PokeAPI [React Native, Maps API, PokeAPI].",
+    url: "",
+    source: "https://github.com/lajesfen/poke-maps",
+  },
+  octree: {
+    title: "Octree Visualizer",
+    description:
+      "Interactive Octree visualizer built with P5.js that displays and subdivides 3D space in real time [P5.js, JavaScript].",
+    url: "",
+    source: "https://github.com/lajesfen/CS2023-octree-visual",
   },
 };
 

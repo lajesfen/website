@@ -10,6 +10,8 @@ import SelectableObject from "../components/desk/SelectableObject";
 import { DonutModel } from "../models/DonutModel";
 import { GoModel } from "../models/GoModel";
 import { HCAModel } from "../models/HCAModel";
+import { OctreeModel } from "../models/OctreeModel";
+import { PokeMapsModel } from "../models/PokeMapsModel";
 
 const DEFAULT_POS = new THREE.Vector3(-5, 8, 15.2);
 const DEFAULT_LOOK_AT = new THREE.Vector3(0, 1.5, 0);
@@ -33,6 +35,8 @@ function Desk({
   const donutRef = useRef<THREE.Object3D>(null!);
   const lcaRef = useRef<THREE.Object3D>(null!);
   const goRef = useRef<THREE.Object3D>(null!);
+  const pokemapsRef = useRef<THREE.Object3D>(null!);
+  const octreeRef = useRef<THREE.Object3D>(null!);
 
   const focusOn = (id: string, ref: RefObject<THREE.Object3D>) => {
     if (focusedId == null) {
@@ -95,6 +99,26 @@ function Desk({
         ref={goRef}
         focused={focusedId == "go"}
         onClick={() => focusOn("go", goRef)}
+      />
+
+      <SelectableObject
+        component={PokeMapsModel}
+        position={[3.6, 1, -4]}
+        rotation={[0, -0.5, 0]}
+        scale={0.8}
+        ref={pokemapsRef}
+        focused={focusedId == "pokemaps"}
+        onClick={() => focusOn("pokemaps", pokemapsRef)}
+      />
+
+      <SelectableObject
+        component={OctreeModel}
+        position={[4, 0, 1]}
+        rotation={[0, -0.2, 0]}
+        scale={1}
+        ref={octreeRef}
+        focused={focusedId == "octree"}
+        onClick={() => focusOn("octree", octreeRef)}
       />
 
       <Ground />
