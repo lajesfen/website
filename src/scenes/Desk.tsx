@@ -39,7 +39,7 @@ function Desk({
   const octreeRef = useRef<THREE.Object3D>(null!);
 
   const focusOn = (id: string, ref: RefObject<THREE.Object3D>) => {
-    if (focusedId == null) {
+    if (focusedId == null || focusedId !== id) {
       setView({
         position: new THREE.Vector3(
           ref.current.position.x,
