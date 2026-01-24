@@ -1,8 +1,55 @@
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { useEffect, useRef, useState } from "react";
 import Project, { type ProjectProps } from "./components/Project";
 
-const data: ProjectProps[] = [];
+gsap.registerPlugin(useGSAP);
 
 function App() {
+  const [projects, setProjects] = useState<ProjectProps[] | null>(null);
+  const projectsRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/portfolio/projects`,
+        );
+
+        if (!response.ok) {
+          setProjects([]);
+          throw new Error("Failed to fetch projects");
+        }
+
+        const data = await response.json();
+        setProjects(data.projects);
+      } catch (error) {
+        setProjects([]);
+        console.error("Error fetching project data:", error);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
+  useGSAP(
+    () => {
+      if (!projects || projects.length === 0) return;
+
+      gsap.from(".project-item", {
+        opacity: 0,
+        y: 20,
+        stagger: 0.15,
+        duration: 0.6,
+        ease: "power2.out",
+      });
+    },
+    {
+      scope: projectsRef,
+      dependencies: [projects],
+    },
+  );
+
   return (
     <main className="w-full min-h-screen flex justify-center">
       <div className="max-w-2xl px-8 mt-[25vh] mb-[10vh]">
@@ -57,22 +104,21 @@ function App() {
               .
             </p>
           </div>
-          <div className="flex flex-col gap-3">
+          <div ref={projectsRef} className="flex flex-col gap-3">
             <p>My recent work...</p>
-            {data.length > 0 ? (
-              Array.from(data).map((project, i) => (
-                <Project
-                  key={i}
-                  title={project.title}
-                  description={project.description}
-                  imageUrl={project.imageUrl}
-                  url={project.url}
-                  date={project.date}
-                />
-              ))
-            ) : (
-              <p>🐌 -Nothing here... yet</p>
-            )}
+            {projects && projects.length > 0
+              ? projects.map((project, i) => (
+                  <div key={i} className="project-item">
+                    <Project
+                      title={project.title}
+                      description={project.description}
+                      imageUrl={project.imageUrl}
+                      url={project.url}
+                      date={project.date}
+                    />
+                  </div>
+                ))
+              : projects && <p>🐌 -Nothing here... yet</p>}
           </div>
         </div>
       </div>
