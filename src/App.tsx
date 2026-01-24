@@ -1,6 +1,6 @@
-import Work, { type WorkProps } from "./components/Work";
+import Project, { type ProjectProps } from "./components/Project";
 
-const data: WorkProps[] = [];
+const data: ProjectProps[] = [];
 
 function App() {
   return (
@@ -61,7 +61,7 @@ function App() {
             <p>My recent work...</p>
             {data.length > 0 ? (
               Array.from(data).map((project, i) => (
-                <Work
+                <Project
                   key={i}
                   title={project.title}
                   description={project.description}

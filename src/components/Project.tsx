@@ -1,4 +1,4 @@
-export interface WorkProps {
+export interface ProjectProps {
   title: string;
   description: string;
   imageUrl: string;
@@ -6,7 +6,7 @@ export interface WorkProps {
   url?: string;
 }
 
-function Work({ title, description, imageUrl, url, date }: WorkProps) {
+function Project({ title, description, imageUrl, url, date }: ProjectProps) {
   return (
     <div
       className="flex flex-row gap-3 p-1 items-center hover:opacity-60 cursor-pointer transition-opacity duration-200"
@@ -27,4 +27,4 @@ function Work({ title, description, imageUrl, url, date }: WorkProps) {
   );
 }
 
-export default Work;
+export default Project;
