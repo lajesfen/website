@@ -22,6 +22,11 @@ function App() {
         }
 
         const data = await response.json();
+        const sortedProjects = data.projects.sort(
+          (a: ProjectProps, b: ProjectProps) =>
+            new Date(b.date).getTime() - new Date(a.date).getTime(),
+        );
+        data.projects = sortedProjects;
         setProjects(data.projects);
       } catch (error) {
         setProjects([]);
