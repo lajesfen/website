@@ -69,14 +69,14 @@ function App() {
               engaging experiences that blend creativity with technology.
             </p>
             <p>
-              Before focusing fully on software, I worked as a 3D Art Lead at a
-              game company, where I led a small team and collaborated closely
-              with developers on in-game content for live events. More recently,
-              I worked as a teaching assistant at my university, helping
-              students build VR applications.
+              Before diving fully into software development, I led a 3D art team
+              at a game company, collaborating with developers on optimized
+              content for live events. More recently, I've been a teaching
+              assistant at my university, guiding students through VR
+              application development and UI/UX principles.
             </p>
             <p>
-              I'm always learning, building, and experimenting with new ideas.
+              I'm always learning, experimenting, and building new things.
               Mostly for fun, sometimes for something bigger.
             </p>
             <p>
