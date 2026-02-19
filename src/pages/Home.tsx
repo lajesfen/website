@@ -1,43 +1,24 @@
 import { useGSAP } from "@gsap/react";
+import { useQuery } from "@tanstack/react-query";
 import gsap from "gsap";
-import { useEffect, useRef, useState } from "react";
-import Project from "../components/Project";
-import type { ProjectProps } from "../types/Project";
+import { useRef } from "react";
+import { InlineLink } from "../components/InlineLink";
+import { ProjectItem } from "../components/ProjectItem";
+import { fetchProjects } from "../utils/api";
 
-function Home() {
-  const [projects, setProjects] = useState<ProjectProps[] | null>(null);
+export function Home() {
   const projectsRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/portfolio/projects`,
-        );
-
-        if (!response.ok) {
-          setProjects([]);
-          throw new Error("Failed to fetch projects");
-        }
-
-        const data = await response.json();
-        const sortedProjects = data.projects.sort(
-          (a: ProjectProps, b: ProjectProps) =>
-            new Date(b.date).getTime() - new Date(a.date).getTime(),
-        );
-        setProjects(sortedProjects);
-      } catch (error) {
-        setProjects([]);
-        console.error("Error fetching project data:", error);
-      }
-    };
-
-    fetchProjects();
-  }, []);
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["projects"],
+    queryFn: async () => {
+      return fetchProjects();
+    },
+  });
 
   useGSAP(
     () => {
-      if (!projects || projects.length === 0) return;
+      if (!data || data.length === 0) return;
 
       gsap.from(".project-item", {
         opacity: 0,
@@ -49,7 +30,7 @@ function Home() {
     },
     {
       scope: projectsRef,
-      dependencies: [projects],
+      dependencies: [data],
     },
   );
 
@@ -79,40 +60,25 @@ function Home() {
             </p>
             <p>
               @{" "}
-              <a
-                className="underline hover:opacity-60 transition-opacity duration-200"
-                href="https://github.com/lajesfen"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <InlineLink href={"https://github.com/lajesfen"}>
                 GitHub
-              </a>
+              </InlineLink>
               ,{" "}
-              <a
-                className="underline hover:opacity-60 transition-opacity duration-200"
-                href="https://linkedin.com/in/luciano-aguirre-jesfen"
-                target="_blank"
-                rel="noopener noreferrer"
+              <InlineLink
+                href={"https://linkedin.com/in/luciano-aguirre-jesfen"}
               >
                 LinkedIn
-              </a>{" "}
+              </InlineLink>{" "}
               or{" "}
-              <a
-                className="underline hover:opacity-60 transition-opacity duration-200"
-                href="mailto:lajesfen@gmail.com"
-                target="_blank"
-              >
-                Email
-              </a>
-              .
+              <InlineLink href={"mailto:lajesfen@gmail.com"}>Email</InlineLink>.
             </p>
           </div>
           <div ref={projectsRef} className="flex flex-col gap-3">
-            <h1 className="font-medium">My recent work...</h1>
-            {projects && projects.length > 0
-              ? projects.map((project, i) => (
+            <h2 className="font-medium">My recent work...</h2>
+            {data && data.length > 0
+              ? data.map((project, i) => (
                   <div key={i} className="project-item">
-                    <Project
+                    <ProjectItem
                       title={project.title}
                       path={project.path}
                       description={project.description}
@@ -124,12 +90,10 @@ function Home() {
                     />
                   </div>
                 ))
-              : projects && <p>🐌 -Nothing here... yet</p>}
+              : data && <p>🐌 -Nothing here... yet</p>}
           </div>
         </div>
       </div>
     </main>
   );
 }
-
-export default Home;
