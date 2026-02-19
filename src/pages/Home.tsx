@@ -56,11 +56,11 @@ function Home() {
   return (
     <main className="w-full min-h-screen flex justify-center">
       <div className="max-w-2xl px-8 mt-[25vh] mb-[10vh]">
-        <div className="fixed top-0 left-0 w-full h-[16vh] bg-linear-to-b from-[#FAF9F6] to-[#FAF9F6]/20 z-10 pointer-events-none"></div>
-        <div className="fixed bottom-0 left-0 w-full h-[16vh] bg-linear-to-t from-[#FAF9F6] to-[#FAF9F6]/0 z-10 pointer-events-none"></div>
+        <div className="fixed top-0 left-0 w-full h-[16vh] bg-linear-to-b from-[#FAF9F6] to-[#FAF9F6]/20 z-10 pointer-events-none" />
+        <div className="fixed bottom-0 left-0 w-full h-[16vh] bg-linear-to-t from-[#FAF9F6] to-[#FAF9F6]/0 z-10 pointer-events-none" />
         <div className="flex flex-col gap-8">
           <div className="flex flex-col gap-8 text-pretty">
-            <p>Hi,</p>
+            <p>Hello,</p>
             <p>
               I'm Luciano, a Computer Science student based in Lima-Peru, with a
               strong interest in Web Development. I enjoy building interactive,
@@ -80,7 +80,7 @@ function Home() {
             <p>
               @{" "}
               <a
-                className="underline"
+                className="underline hover:opacity-60 transition-opacity duration-200"
                 href="https://github.com/lajesfen"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -89,7 +89,7 @@ function Home() {
               </a>
               ,{" "}
               <a
-                className="underline"
+                className="underline hover:opacity-60 transition-opacity duration-200"
                 href="https://linkedin.com/in/luciano-aguirre-jesfen"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -98,7 +98,7 @@ function Home() {
               </a>{" "}
               or{" "}
               <a
-                className="underline"
+                className="underline hover:opacity-60 transition-opacity duration-200"
                 href="mailto:lajesfen@gmail.com"
                 target="_blank"
               >

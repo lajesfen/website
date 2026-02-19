@@ -19,15 +19,17 @@ function Project({
       to={description_large ? `/projects/${path}` : (url_demo || url_repo)!}
       className="flex flex-row gap-3 p-1 items-center hover:opacity-60 group cursor-pointer transition-opacity duration-200"
     >
-      <img
-        src={image_url}
-        className="drop-shadow-sm -rotate-8 group-hover:-rotate-25 transition-transform duration-300"
-        width={36}
-        height={36}
-        alt={title}
-      />
+      <div className="w-10 h-10 shrink-0">
+        <img
+          src={image_url}
+          className="drop-shadow-md -rotate-8 group-hover:rotate-4 transition-transform duration-300"
+          width={38}
+          height={38}
+          alt={title}
+        />
+      </div>
       <div className="flex flex-col w-full">
-        <p>{title}</p>
+        <p>{title} ↗</p>
         <p className="text-sm text-[#A0A0A0] -mt-0.5">{description}</p>
       </div>
       <p className="text-sm text-right whitespace-nowrap">{stringDate}</p>
