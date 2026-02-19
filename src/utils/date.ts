@@ -6,3 +6,11 @@ export function formatDate(date: Date): string {
   };
   return dateObj.toLocaleDateString(undefined, options);
 }
+
+export function getToday() {
+  return new Date().toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}

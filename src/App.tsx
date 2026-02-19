@@ -1,12 +1,12 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import ProjectPage from "./pages/ProjectPage";
+import { Home } from "./pages/Home";
+import { ProjectPage } from "./pages/ProjectPage";
 
 gsap.registerPlugin(useGSAP);
 
-function App() {
+export function App() {
   return (
     <BrowserRouter>
       <Routes>
@@ -16,5 +16,3 @@ function App() {
     </BrowserRouter>
   );
 }
-
-export default App;

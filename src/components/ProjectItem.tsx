@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import type { ProjectProps } from "../types/Project";
 import { formatDate } from "../utils/date";
 
-function Project({
+export function ProjectItem({
   title,
   description,
   description_large,
@@ -17,7 +17,7 @@ function Project({
   return (
     <Link
       to={description_large ? `/projects/${path}` : (url_demo || url_repo)!}
-      className="flex flex-row gap-3 p-1 items-center hover:opacity-60 group cursor-pointer transition-opacity duration-200"
+      className="flex flex-row gap-3 p-1 items-center hover:opacity-60 group cursor-pointer transition-opacity duration-100"
     >
       <div className="w-10 h-10 shrink-0">
         <img
@@ -36,5 +36,3 @@ function Project({
     </Link>
   );
 }
-
-export default Project;
