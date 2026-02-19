@@ -75,22 +75,19 @@ export function Home() {
           </div>
           <div ref={projectsRef} className="flex flex-col gap-3">
             <h2 className="font-medium">My recent work...</h2>
-            {data && data.length > 0
-              ? data.map((project, i) => (
-                  <div key={i} className="project-item">
-                    <ProjectItem
-                      title={project.title}
-                      path={project.path}
-                      description={project.description}
-                      description_large={project.description_large}
-                      image_url={project.image_url}
-                      url_demo={project.url_demo}
-                      url_repo={project.url_repo}
-                      date={project.date}
-                    />
+            {isError && <p>🐌 -Oops something went wrong</p>}
+            {!isLoading && !isError && data && data.length === 0 && (
+              <p>🐌 Nothing here... yet</p>
+            )}
+            {!isLoading && !isError && data && data.length > 0 && (
+              <div className="flex flex-col gap-3">
+                {data.map((project) => (
+                  <div key={project.path} className="project-item">
+                    <ProjectItem {...project} />
                   </div>
-                ))
-              : data && <p>🐌 -Nothing here... yet</p>}
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
