@@ -3,6 +3,7 @@ import { getToday } from "../utils/date";
 import { randomOrderNum } from "../utils/random";
 import { JaggedBottomSvg } from "./JaggedBottomSvg";
 import { JaggedTopSvg } from "./JaggedTopSvg";
+import { MarkdownImage } from "./MarkdownImage";
 
 export function ProjectReceipt({ description }: { description: string }) {
   return (
@@ -38,13 +39,7 @@ export function ProjectReceipt({ description }: { description: string }) {
                 {children}
               </a>
             ),
-            img: ({ src, alt }) => (
-              <img
-                src={src}
-                alt={alt}
-                className="max-w-1/2 mx-auto my-6 rounded-md"
-              />
-            ),
+            img: ({ src, alt }) => <MarkdownImage src={src} alt={alt} />,
           }}
         >
           {description}
