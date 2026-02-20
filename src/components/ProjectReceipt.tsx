@@ -1,4 +1,5 @@
 import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
 import { getToday } from "../utils/date";
 import { randomOrderNum } from "../utils/random";
 import { JaggedBottomSvg } from "./JaggedBottomSvg";
@@ -16,6 +17,7 @@ export function ProjectReceipt({ description }: { description: string }) {
 
       <div className="text-xs prose-sm wrap-break-word">
         <ReactMarkdown
+          rehypePlugins={[rehypeRaw]}
           components={{
             h1: ({ children }) => (
               <div className="font-bold uppercase border-t border-dashed border-[#ccc] pt-3">
@@ -40,6 +42,17 @@ export function ProjectReceipt({ description }: { description: string }) {
               </a>
             ),
             img: ({ src, alt }) => <MarkdownImage src={src} alt={alt} />,
+            video: ({ src }) => (
+              <video
+                controls={false}
+                src={src}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full my-6 rounded-md"
+              />
+            ),
           }}
         >
           {description}
