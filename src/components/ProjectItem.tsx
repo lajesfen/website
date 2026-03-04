@@ -17,7 +17,7 @@ export function ProjectItem({
   return (
     <Link
       to={description_large ? `/projects/${path}` : (url_demo || url_repo)!}
-      className="flex flex-row gap-3 p-1 items-center hover:opacity-60 group cursor-pointer transition-opacity duration-100"
+      className="flex flex-row gap-4 p-1 items-center hover:opacity-60 group cursor-pointer transition-opacity duration-100"
     >
       <div className="size-10 shrink-0 aspect-square">
         <img
