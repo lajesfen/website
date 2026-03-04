@@ -41,7 +41,6 @@ export function Home() {
         <div className="fixed bottom-0 left-0 w-full h-[16vh] bg-linear-to-t from-[#FAF9F6] to-[#FAF9F6]/0 z-10 pointer-events-none" />
         <div className="flex flex-col gap-8">
           <div className="flex flex-col gap-8 text-pretty">
-            <p>Hello,</p>
             <p>
               I'm Luciano, a Computer Science student based in Lima-Peru, with a
               strong interest in Web Development. I enjoy building interactive,
@@ -49,10 +48,12 @@ export function Home() {
             </p>
             <p>
               Before diving fully into software development, I led a 3D art team
-              at a game company, collaborating with developers on optimized
-              content for live events. More recently, I've been a teaching
-              assistant at my university, guiding students through VR
-              application development and UI/UX principles.
+              at a game company, contributing to large-scale live interactive
+              events. The role required cross-functional coordination,
+              production planning, and delivering assets under real-time
+              constraints. More recently, I've been a teaching assistant at my
+              university, guiding students through VR application development
+              and UI/UX principles.
             </p>
             <p>
               I'm always learning, experimenting, and building new things.
