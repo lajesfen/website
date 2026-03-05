@@ -27,7 +27,7 @@ export function ProjectItem({
         />
       </div>
       <div className="flex flex-col w-full">
-        <p>{title} ↗</p>
+        <p>{title}</p>
         <p className="text-sm text-[#A0A0A0] -mt-0.5">{description}</p>
       </div>
       <p className="text-sm text-right whitespace-nowrap">{stringDate}</p>

@@ -8,7 +8,7 @@ import { MarkdownImage } from "./MarkdownImage";
 
 export function ProjectReceipt({ description }: { description: string }) {
   return (
-    <article className="w-full font-mono bg-white px-6 p-8 drop-shadow-md relative">
+    <article className="receipt z-10 w-full font-mono bg-white px-6 p-8 drop-shadow-md relative">
       <JaggedTopSvg />
       <div className="text-center mb-4 border-b border-dashed border-[#aaa] pb-4">
         <div className="text-xs text-[#666] mt-1">{getToday()}</div>
@@ -36,7 +36,7 @@ export function ProjectReceipt({ description }: { description: string }) {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="underline text-[#007acc]"
+                className="underline underline-offset-2 decoration-dashed"
               >
                 {children}
               </a>

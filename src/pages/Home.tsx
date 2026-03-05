@@ -22,7 +22,7 @@ export function Home() {
 
       gsap.from(".project-item", {
         opacity: 0,
-        y: 20,
+        y: -20,
         stagger: 0.15,
         duration: 0.6,
         ease: "power2.out",
@@ -71,7 +71,10 @@ export function Home() {
                 LinkedIn
               </InlineLink>{" "}
               or{" "}
-              <InlineLink href={"mailto:lajesfen@gmail.com"}>Email</InlineLink>.
+              <InlineLink href={"mailto:lajesfen@gmail.com"}>
+                email me
+              </InlineLink>
+              .
             </p>
           </div>
           <div ref={projectsRef} className="flex flex-col gap-3">

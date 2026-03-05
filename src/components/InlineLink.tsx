@@ -7,7 +7,7 @@ export function InlineLink({
 }) {
   return (
     <a
-      className="underline hover:opacity-60 transition-opacity duration-100"
+      className="underline underline-offset-4 decoration-dotted opacity-60 hover:opacity-100 transition-opacity duration-100"
       href={href}
       target="_blank"
       rel="noopener noreferrer"
