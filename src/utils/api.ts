@@ -1,31 +1,28 @@
+import projects from "../data/projects.json";
 import type { ProjectProps } from "../types/Project";
 
-export async function fetchProjects(): Promise<ProjectProps[]> {
-  const response = await fetch(
-    `${import.meta.env.VITE_API_URL}/portfolio/projects`,
-  );
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch projects");
-  }
-
-  const data = await response.json();
-
-  return data.projects.sort(
-    (a: ProjectProps, b: ProjectProps) =>
-      new Date(b.date).getTime() - new Date(a.date).getTime(),
-  );
+export function fetchProjects(): ProjectProps[] {
+  return projects
+    .map((project) => ({
+      ...project,
+      url_demo: project.url_demo ?? undefined,
+      url_repo: project.url_repo ?? undefined,
+      date: new Date(project.date),
+    }))
+    .sort((a, b) => b.date.getTime() - a.date.getTime());
 }
 
-export async function fetchProjectByPath(path: string): Promise<ProjectProps> {
-  const response = await fetch(
-    `${import.meta.env.VITE_API_URL}/portfolio/projects/${path}`,
-  );
+export function fetchProjectByPath(path: string): ProjectProps {
+  const project = projects.find((p) => p.path === path);
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch project");
+  if (!project) {
+    throw new Error("Project not found");
   }
 
-  const data = await response.json();
-  return data.project;
+  return {
+    ...project,
+    url_demo: project.url_demo ?? undefined,
+    url_repo: project.url_repo ?? undefined,
+    date: new Date(project.date),
+  };
 }

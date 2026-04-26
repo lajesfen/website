@@ -1,0 +1,52 @@
+[
+    {
+        "title": "Bones, Camera, Action!",
+        "description": "Real-time 3D motion capture for the web using MediaPipe and webcam input.",
+        "description_large": "**Bones, Camera, Action!** is a web-based motion capture experiment built with [Next.js](https://nextjs.org/), [Three.js](https://threejs.org/) (via [React Three Fiber](https://r3f.docs.pmnd.rs/)), and [MediaPipe](https://ai.google.dev/edge/mediapipe/solutions/guide).\n\nThe application captures the user's pose in real time using MediaPipe's Pose Landmarker. Landmark data is streamed directly into the Three.js scene, where each tracked joint is mapped to a corresponding bone in a 3D rig. Movements are applied live to a pre-rigged character mesh, effectively turning the browser into a simple motion capture system.\n\nThe 3D model must be rigged using [Mixamo](https://www.mixamo.com/), as the bone mapping relies on specific naming conventions. By leveraging MediaPipe for pose estimation, the system requires no external sensors or markers, making it a fully browser-based mocap solution.\n\n![Bones, Camera, Action! Demo](https://pezjkdkkovrxqujcxfnd.supabase.co/storage/v1/object/public/icons/blog/bca-demo.gif)",
+        "image_url": "https://pezjkdkkovrxqujcxfnd.supabase.co/storage/v1/object/public/icons/projects/bones-camera-action.png",
+        "url_repo": "https://github.com/lajesfen/CS4016-motion-transfer",
+        "url_demo": "https://cs4016-motion-transfer.vercel.app/",
+        "date": "2025-06-24 11:00:00",
+        "path": "bones-camera-action"
+    },
+    {
+        "title": "Go → x86 Compiler",
+        "description": "Compiler implemented in C++ that translates Go source code into x86 assembly.",
+        "description_large": "**Go → x86 Compiler** is a compiler written in **C++** that translates a subset of the [Go](https://go.dev/) language into **x86 assembly**.\n\nThe program parses modified Go source code and generates usable x86 assembly output. It supports core language features such as variable declarations, arithmetic and relational operations, conditional statements, and function definitions and calls.\n\nBeyond the basic subset, the compiler also implements support for structs, arrays (including multidimensional arrays), strings, and ternary operations. The project focuses on the full compilation pipeline: lexical analysis, parsing, semantic validation, and code generation, targeting low-level assembly as the final output.",
+        "image_url": "https://pezjkdkkovrxqujcxfnd.supabase.co/storage/v1/object/public/icons/projects/go-compiler.png",
+        "url_repo": "https://github.com/lestorialqs/compi_go",
+        "url_demo": null,
+        "date": "2025-11-26 11:00:00",
+        "path": "go-compiler"
+    },
+    {
+        "title": "VR Band",
+        "description": "Collaborative VR experience for Meta Quest, developed in Unity, enabling real-time multiplayer jam sessions.",
+        "description_large": "**VR Band** is a collaborative virtual reality experience for **Meta Quest**, developed in [Unity](https://unity.com/) using the [Meta XR SDK](https://developers.meta.com/horizon/documentation/unity/unity-sdks-overview/).\n\nThe application enables real-time multiplayer jam sessions in VR. Players can join the same local session and perform together using a set of fully interactive instruments: drums, keyboard, xylophone, maracas, and a Peruvian cajón. Each instrument is designed to respond naturally to VR controller input, simulating physical interaction within the virtual space.\n\nMultiplayer synchronization allows participants to share the same environment and play simultaneously, turning the experience into a lightweight virtual rehearsal room built specifically for immersive performance.\n\n<video src=\"https://pezjkdkkovrxqujcxfnd.supabase.co/storage/v1/object/public/icons/blog/vr-band-demo.mp4\"/>",
+        "image_url": "https://pezjkdkkovrxqujcxfnd.supabase.co/storage/v1/object/public/icons/projects/vr-band.png",
+        "url_repo": "https://github.com/lajesfen/CS4053-vr-band",
+        "url_demo": null,
+        "date": "2025-07-15 11:00:00",
+        "path": "vr-band"
+    },
+    {
+        "title": "Poke-Maps",
+        "description": "React Native app that uses an interactive map to spawn Pokémon in real-world locations, allowing users to catch them by tapping on markers while fetching names and icons from the PokeAPI.",
+        "description_large": "**Poke-Maps** is a location-based mobile application built with **React Native**. It integrates [react-native-maps](https://github.com/react-native-maps/react-native-maps) for map rendering and consumes data from the [PokeAPI](https://pokeapi.co/) REST service.\n\nThe app generates Pokémon markers dynamically around the user's current location. Users can tap on markers to simulate capturing Pokémon, which are then persisted locally on the device using local storage.\n\n![Poke-Maps Demo](https://pezjkdkkovrxqujcxfnd.supabase.co/storage/v1/object/public/icons/blog/poke-maps-demo.png)",
+        "image_url": "https://pezjkdkkovrxqujcxfnd.supabase.co/storage/v1/object/public/icons/projects/poke-maps.png",
+        "url_repo": "https://github.com/lajesfen/poke-maps",
+        "url_demo": null,
+        "date": "2023-08-11 11:00:00",
+        "path": "poke-maps"
+    },
+    {
+        "title": "Aseprite Auto-Outline",
+        "description": "Lua extension for Aseprite that automatically generates dynamic outlines in real-time as the user draws.",
+        "description_large": "**Aseprite Auto-Outline** is a **Lua** extension for [Aseprite](https://www.aseprite.org/) that generates outlines automatically in real time as the user draws.\n\nThe add-on hooks into the drawing workflow and dynamically detects newly placed pixels, generating an outline around the active shape without requiring manual selection or post-processing. This allows artists to maintain consistent borders while iterating quickly on sprites.\n\nThe extension is written in Lua and leverages Aseprite's scripting API to monitor canvas updates and apply outline logic directly within the editor.\n\n<video src=\"https://pezjkdkkovrxqujcxfnd.supabase.co/storage/v1/object/public/icons/blog/aseprite-ao-demo.mp4\"/>",
+        "image_url": "https://pezjkdkkovrxqujcxfnd.supabase.co/storage/v1/object/public/icons/projects/aseprite-ao.png",
+        "url_repo": "https://github.com/lajesfen/aseprite-auto-outline",
+        "url_demo": null,
+        "date": "2025-10-11 11:00:00",
+        "path": "aseprite-ao"
+    }
+]

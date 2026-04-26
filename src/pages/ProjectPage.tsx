@@ -1,5 +1,4 @@
 import { useGSAP } from "@gsap/react";
-import { useQuery } from "@tanstack/react-query";
 import gsap from "gsap";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { InlineLink } from "../components/InlineLink";
@@ -9,13 +8,7 @@ import { formatDate } from "../utils/date";
 
 export function ProjectPage() {
   const { projectPath } = useParams<{ projectPath: string }>();
-
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ["project", projectPath],
-    queryFn: async () => {
-      return fetchProjectByPath(projectPath!);
-    },
-  });
+  const data = fetchProjectByPath(projectPath!);
 
   useGSAP(
     () => {
@@ -40,15 +33,7 @@ export function ProjectPage() {
     },
   );
 
-  if (isLoading) {
-    return (
-      <main className="w-full min-h-screen flex justify-center items-center">
-        <p>Loading...</p>
-      </main>
-    );
-  }
-
-  if (!data || isError) {
+  if (!data) {
     return <Navigate to="/" />;
   }
 

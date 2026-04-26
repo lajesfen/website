@@ -1,5 +1,4 @@
 import { useGSAP } from "@gsap/react";
-import { useQuery } from "@tanstack/react-query";
 import gsap from "gsap";
 import { useRef } from "react";
 import { InlineLink } from "../components/InlineLink";
@@ -8,13 +7,7 @@ import { fetchProjects } from "../utils/api";
 
 export function Home() {
   const projectsRef = useRef<HTMLDivElement | null>(null);
-
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ["projects"],
-    queryFn: async () => {
-      return fetchProjects();
-    },
-  });
+  const data = fetchProjects();
 
   useGSAP(
     () => {
@@ -79,11 +72,7 @@ export function Home() {
           </div>
           <div ref={projectsRef} className="flex flex-col gap-3">
             <h2 className="font-medium">My recent work...</h2>
-            {isError && <p>🐌 -Oops something went wrong</p>}
-            {!isLoading && !isError && data && data.length === 0 && (
-              <p>🐌 Nothing here... yet</p>
-            )}
-            {!isLoading && !isError && data && data.length > 0 && (
+            {data && data.length > 0 && (
               <div className="flex flex-col gap-3">
                 {data.map((project) => (
                   <div key={project.path} className="project-item">
