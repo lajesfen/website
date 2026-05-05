@@ -21,7 +21,7 @@ export function ProjectItem({
     >
       <div className="size-10 shrink-0 aspect-square">
         <img
-          src={image_url}
+          src={`icons/${image_url}`}
           className="drop-shadow-[0px_3px_2px_rgba(0,0,0,0.15)] -rotate-8 group-hover:rotate-4 object-cover group-hover:scale-110 transition-transform duration-300"
           alt={title}
         />
