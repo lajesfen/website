@@ -1,0 +1,64 @@
+import Email from "../assets/email.webp";
+import GitHub from "../assets/github.webp";
+import LinkedIn from "../assets/linkedin.webp";
+import { GrabbableObject } from "../components/GrabbableObject";
+import projects from "../data/projects.json";
+import type { Project } from "../types/Project";
+
+export function InteractiveHome() {
+  const getPosition = (index: number, total: number) => ({
+    x: 0.5 + (index - (total - 1) / 2) * 0.15 + (Math.random() * 0.04 - 0.02),
+    y: 0.5 + (Math.random() * 0.06 - 0.03),
+    rotation: Math.random() * 20 - 10,
+  });
+
+  return (
+    <div className="relative w-full h-screen">
+      {projects.map((project: Project, index) => (
+        <GrabbableObject
+          key={index}
+          label={project.title}
+          url={project.path}
+          defaultX={getPosition(index, projects.length).x}
+          defaultY={getPosition(index, projects.length).y}
+          defaultRotation={getPosition(index, projects.length).rotation}
+        >
+          <img
+            src={"../assets/" + project.image_url}
+            alt={project.title}
+            className="w-42 h-42 rounded-3xl border-3 border-white"
+          />
+        </GrabbableObject>
+      ))}
+
+      {/* Media Icons */}
+      <GrabbableObject
+        defaultX={0.86}
+        defaultY={0.85}
+        defaultRotation={-15}
+        label="LinkedIn"
+        url="/linkedin"
+      >
+        <img src={LinkedIn} alt="LinkedIn" className="w-12 h-12" />
+      </GrabbableObject>
+      <GrabbableObject
+        defaultX={0.9}
+        defaultY={0.83}
+        defaultRotation={15}
+        label="GitHub"
+        url="/github"
+      >
+        <img src={GitHub} alt="GitHub" className="w-12 h-12" />
+      </GrabbableObject>
+      <GrabbableObject
+        defaultX={0.94}
+        defaultY={0.85}
+        defaultRotation={0}
+        label="Email"
+        url="/email"
+      >
+        <img src={Email} alt="Email" className="w-12 h-12" />
+      </GrabbableObject>
+    </div>
+  );
+}

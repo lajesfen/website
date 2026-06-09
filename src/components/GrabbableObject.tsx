@@ -1,33 +1,30 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useEffect, useRef, useState } from "react";
-import { useTooltip } from "../../hooks/useTooltip";
-import { Tooltip } from "./Tooltip";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const GrabbableObject = ({
   label,
-  defaults,
   url,
+  defaultX = 0.5,
+  defaultY = 0.5,
+  defaultRotation = 0,
   children,
 }: {
   label?: string;
-  defaults?: { x: number; y: number; rotation: number };
   url?: string;
+  defaultX?: number;
+  defaultY?: number;
+  defaultRotation?: number;
   children?: React.ReactNode;
 }) => {
   const object = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({
-    top: defaults?.y ?? 0.5,
-    left: defaults?.x ?? 0.5,
-  });
-  const [objectHeight, setObjectHeight] = useState(0);
+  const tooltip = useRef<HTMLDivElement>(null);
+  const [position, setPosition] = useState({ top: defaultY, left: defaultX });
   const [isDragging, setIsDragging] = useState(false);
-  const { tooltipRef, handleMouseEnter, handleMouseLeave } =
-    useTooltip(isDragging);
+  const [isHovered, setIsHovered] = useState(false);
 
-  useEffect(() => {
-    if (object.current) setObjectHeight(object.current.offsetHeight);
-  }, []);
+  const navigate = useNavigate();
 
   useGSAP(
     () => {
@@ -41,18 +38,30 @@ export const GrabbableObject = ({
     { scope: object, dependencies: [isDragging] },
   );
 
+  useGSAP(
+    () => {
+      gsap.killTweensOf(tooltip.current);
+      gsap.to(
+        tooltip.current,
+        isHovered && !isDragging
+          ? { scale: 1, opacity: 1, y: 0, duration: 0.2 }
+          : { scale: 0.8, opacity: 0, y: 6, duration: 0.15 },
+      );
+    },
+    { dependencies: [isHovered, isDragging] },
+  );
+
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     const startX = e.clientX;
     const startY = e.clientY;
     const startTop = position.top;
     const startLeft = position.left;
+    let hasMoved = false;
 
     setIsDragging(true);
 
-    let hasMoved = false;
     const handleMouseMove = (e: MouseEvent) => {
       const deltaY = e.clientY - startY;
-
       hasMoved = true;
       setPosition({
         top: Math.min(Math.max(startTop + deltaY / window.innerHeight, 0), 1),
@@ -66,11 +75,7 @@ export const GrabbableObject = ({
     const handleMouseUp = () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
-
-      if (!hasMoved && url) {
-        console.log(`Opening ${url}`);
-      }
-
+      if (!hasMoved && url) navigate(url);
       setIsDragging(false);
     };
 
@@ -79,33 +84,39 @@ export const GrabbableObject = ({
   };
 
   return (
-    <div>
+    <div
+      className="fixed select-none"
+      style={{
+        top: `${position.top * 100}%`,
+        left: `${position.left * 100}%`,
+        translate: "-50% -50%",
+        cursor: isDragging ? "grabbing" : "grab",
+        width: "max-content",
+        height: "max-content",
+      }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onDragStart={(e) => e.preventDefault()}
+    >
       {label && (
-        <Tooltip
-          label={label}
-          position={position}
-          objectHeight={objectHeight}
-          tooltipRef={tooltipRef}
-        />
+        <div
+          ref={tooltip}
+          className="absolute -top-9 left-1/2 -translate-x-1/2 pointer-events-none select-none px-2 py-1 rounded-full bg-white/70 border border-white text-xs shadow-lg whitespace-nowrap opacity-0"
+        >
+          {label}
+        </div>
       )}
       <div
         ref={object}
-        className="fixed select-none"
+        onMouseDown={handleMouseDown}
         style={{
-          top: `${position.top * 100}%`,
-          left: `${position.left * 100}%`,
-          transform: `translate(-50%, -50%) rotate(${defaults?.rotation ?? 0}deg)`,
-          cursor: isDragging ? "grabbing" : "grab",
+          transform: `rotate(${defaultRotation}deg)`,
           filter: "drop-shadow(0 2px 2px rgba(0,0,0,0.25))",
           width: "max-content",
           height: "max-content",
         }}
-        onMouseDown={handleMouseDown}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onDragStart={(e) => e.preventDefault()}
       >
-        {children}
+        <div style={{ pointerEvents: "none" }}>{children}</div>
       </div>
     </div>
   );

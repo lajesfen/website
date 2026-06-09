@@ -21,9 +21,9 @@
       linear-gradient(to bottom, #f1f1f1 1px, transparent 1px);
   }
   h1 {
-    font-size: var(--text-4xl);
+    font-size: var(--text-xl);
   }
   h2 {
-    font-size: var(--text-2xl);
+    font-size: var(--text-lg);
   }
 }
