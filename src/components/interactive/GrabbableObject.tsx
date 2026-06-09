@@ -1,14 +1,18 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useTooltip } from "../../hooks/useTooltip";
+import { Tooltip } from "./Tooltip";
 
 export const GrabbableObject = ({
-  tooltip,
+  label,
   defaults,
+  url,
   children,
 }: {
-  tooltip?: string;
+  label?: string;
   defaults?: { x: number; y: number; rotation: number };
+  url?: string;
   children?: React.ReactNode;
 }) => {
   const object = useRef<HTMLDivElement>(null);
@@ -16,19 +20,14 @@ export const GrabbableObject = ({
     top: defaults?.y ?? 0.5,
     left: defaults?.x ?? 0.5,
   });
+  const [objectHeight, setObjectHeight] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
-  const lastRotation = useRef(defaults?.rotation ?? 0);
+  const { tooltipRef, handleMouseEnter, handleMouseLeave } =
+    useTooltip(isDragging);
 
-  const tooltipRef = useRef<HTMLDivElement>(null);
-  const [showTooltip, setShowTooltip] = useState(false);
-  const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useGSAP(
-    () => {
-      gsap.set(object.current, { rotation: lastRotation.current });
-    },
-    { scope: object, dependencies: [] },
-  );
+  useEffect(() => {
+    if (object.current) setObjectHeight(object.current.offsetHeight);
+  }, []);
 
   useGSAP(
     () => {
@@ -42,18 +41,6 @@ export const GrabbableObject = ({
     { scope: object, dependencies: [isDragging] },
   );
 
-  useGSAP(
-    () => {
-      gsap.to(
-        tooltipRef.current,
-        showTooltip && !isDragging
-          ? { scale: 1, opacity: 1, y: 0, duration: 0.2 }
-          : { scale: 0.2, opacity: 0, y: 6, duration: 0.15 },
-      );
-    },
-    { scope: object, dependencies: [showTooltip, isDragging] },
-  );
-
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     const startX = e.clientX;
     const startY = e.clientY;
@@ -62,16 +49,11 @@ export const GrabbableObject = ({
 
     setIsDragging(true);
 
-    let lastX = startX;
+    let hasMoved = false;
     const handleMouseMove = (e: MouseEvent) => {
-      const deltaX = e.clientX - lastX;
       const deltaY = e.clientY - startY;
 
-      lastRotation.current += deltaX * 0.1;
-      lastX = e.clientX;
-
-      gsap.set(object.current, { rotation: lastRotation.current });
-
+      hasMoved = true;
       setPosition({
         top: Math.min(Math.max(startTop + deltaY / window.innerHeight, 0), 1),
         left: Math.min(
@@ -85,40 +67,26 @@ export const GrabbableObject = ({
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
 
+      if (!hasMoved && url) {
+        console.log(`Opening ${url}`);
+      }
+
       setIsDragging(false);
-      lastRotation.current +=
-        Math.atan2(e.clientY - startY, e.clientX - startX) * (180 / Math.PI);
     };
 
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("mouseup", handleMouseUp);
   };
 
-  const handleMouseEnter = () => {
-    hoverTimer.current = setTimeout(() => {
-      setShowTooltip(true);
-    }, 300);
-  };
-
-  const handleMouseLeave = () => {
-    if (hoverTimer.current) clearTimeout(hoverTimer.current);
-    setShowTooltip(false);
-  };
-
   return (
     <div>
-      {tooltip && (
-        <div
-          ref={tooltipRef}
-          className="fixed opacity-0 bg-white/80 text-xs shadow-lg px-3 py-1 rounded-full whitespace-nowrap select-none pointer-events-none"
-          style={{
-            top: `calc(${position.top * 100}% - 64px)`,
-            left: `${position.left * 100}%`,
-            transform: "translateX(-50%)",
-          }}
-        >
-          {tooltip}
-        </div>
+      {label && (
+        <Tooltip
+          label={label}
+          position={position}
+          objectHeight={objectHeight}
+          tooltipRef={tooltipRef}
+        />
       )}
       <div
         ref={object}
@@ -126,14 +94,15 @@ export const GrabbableObject = ({
         style={{
           top: `${position.top * 100}%`,
           left: `${position.left * 100}%`,
-          transform: "translate(-50%, -50%)",
+          transform: `translate(-50%, -50%) rotate(${defaults?.rotation ?? 0}deg)`,
           cursor: isDragging ? "grabbing" : "grab",
           filter: "drop-shadow(0 2px 2px rgba(0,0,0,0.25))",
+          width: "max-content",
+          height: "max-content",
         }}
         onMouseDown={handleMouseDown}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        draggable={false}
         onDragStart={(e) => e.preventDefault()}
       >
         {children}
