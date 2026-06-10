@@ -11,7 +11,7 @@ export function SimpleHome() {
   const navigate = useNavigate();
 
   return (
-    <div className="w-full max-w-2xl h-screen flex flex-col items-center justify-center p-6">
+    <div className="w-full max-w-2xl flex flex-col items-center justify-center p-6 mt-[24vh] mb-[12vh]">
       <div className="flex flex-col gap-4 mb-10">
         <p>
           Experienced in Full-Stack Development, with a strong interest in
@@ -20,17 +20,20 @@ export function SimpleHome() {
           environments.
         </p>
         <div className="flex flex-row gap-1">
-          <Button url="https://linkedin.com" label="LinkedIn">
+          <Button
+            url="https://www.linkedin.com/in/luciano-aguirre-jesfen/"
+            label="LinkedIn"
+          >
             <img
               src={LinkedInButton}
               alt="LinkedIn"
               className="w-full h-full"
             />
           </Button>
-          <Button url="https://github.com" label="GitHub">
+          <Button url="https://github.com/lajesfen" label="GitHub">
             <img src={GitHubButton} alt="GitHub" className="w-full h-full" />
           </Button>
-          <Button url="https://linkedin.com" label="Email">
+          <Button url="mailto:lajesfen@gmail.com" label="Email">
             <img src={EmailButton} alt="Email" className="w-full h-full" />
           </Button>
         </div>

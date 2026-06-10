@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 import { LabeledObject } from "./LabeledObject";
 
 export const Button = ({
@@ -11,6 +12,8 @@ export const Button = ({
   size?: number;
   children: React.ReactNode;
 }) => {
+  const navigate = useNavigate();
+
   return (
     <LabeledObject label={label}>
       <button
@@ -20,7 +23,13 @@ export const Button = ({
           height: `${size}px`,
           boxShadow: "inset 0 2px 4px rgba(255,255,255,0.5)",
         }}
-        onClick={() => window.open(url, "_blank")}
+        onClick={() => {
+          if (url.startsWith("http") || url.startsWith("mailto:")) {
+            window.open(url, "_blank");
+          } else {
+            navigate(url);
+          }
+        }}
       >
         {children}
       </button>

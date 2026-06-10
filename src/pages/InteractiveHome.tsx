@@ -37,7 +37,7 @@ export function InteractiveHome() {
         defaultY={0.85}
         defaultRotation={-15}
         label="LinkedIn"
-        url="/linkedin"
+        url="https://www.linkedin.com/in/luciano-aguirre-jesfen/"
       >
         <img src={LinkedIn} alt="LinkedIn" className="w-12 h-12" />
       </GrabbableObject>
@@ -46,7 +46,7 @@ export function InteractiveHome() {
         defaultY={0.83}
         defaultRotation={15}
         label="GitHub"
-        url="/github"
+        url="https://github.com/lajesfen"
       >
         <img src={GitHub} alt="GitHub" className="w-12 h-12" />
       </GrabbableObject>
@@ -55,7 +55,7 @@ export function InteractiveHome() {
         defaultY={0.85}
         defaultRotation={0}
         label="Email"
-        url="/email"
+        url="mailto:lajesfen@gmail.com"
       >
         <img src={Email} alt="Email" className="w-12 h-12" />
       </GrabbableObject>

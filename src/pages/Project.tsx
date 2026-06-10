@@ -19,7 +19,7 @@ export function Project() {
 
   if (!data) {
     return (
-      <div className="w-full max-w-2xl h-screen flex flex-col items-center justify-center p-6">
+      <div className="w-full max-w-2xl min-h-screen flex flex-col items-center justify-center p-6">
         <h2 className="mb-4">Project Not Found</h2>
         <LabeledObject label="Go Back">
           <button
@@ -39,8 +39,8 @@ export function Project() {
   }
 
   return (
-    <div className="w-full max-w-2xl h-screen flex flex-col items-center justify-center p-6">
-      <div className="flex flex-col gap-6 mb-10">
+    <div className="w-full max-w-2xl flex flex-col items-center px-6 mt-[24vh] mb-[12vh]">
+      <div className="flex flex-col gap-6">
         <img
           src={"../assets/" + data.image_url}
           alt={data.title}
@@ -94,6 +94,9 @@ export function Project() {
         <ReactMarkdown
           rehypePlugins={[rehypeRaw]}
           components={{
+            p: ({ children }) => (
+              <p className="text-base leading-relaxed">{children}</p>
+            ),
             h1: ({ children }) => (
               <div className="font-medium uppercase border-t border-[#ccc] pt-3">
                 {children}
@@ -121,24 +124,22 @@ export function Project() {
                 ref={imgRef}
                 src={src}
                 alt={alt}
-                className="mx-auto my-6 rounded-md opacity-0"
+                className="w-full mx-auto my-4 rounded-lg"
                 onLoad={(e) => {
                   const img = e.currentTarget;
                   const isVertical = img.naturalHeight > img.naturalWidth;
-                  img.classList.remove("opacity-0");
-                  img.classList.add(isVertical ? "max-w-1/2" : "w-full");
+                  img.classList.add(isVertical ? "max-w-2/5" : "");
                 }}
               />
             ),
             video: ({ src }) => (
               <video
-                controls={false}
+                controls={true}
                 src={src}
                 autoPlay
-                muted
                 loop
                 playsInline
-                className="w-full my-6 rounded-md"
+                className="w-full mx-auto my-4 rounded-lg"
               />
             ),
           }}

@@ -75,7 +75,13 @@ export const GrabbableObject = ({
     const handleMouseUp = () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
-      if (!hasMoved && url) navigate(url);
+      if (!hasMoved && url) {
+        if (url.startsWith("http") || url.startsWith("mailto:")) {
+          window.open(url, "_blank");
+        } else {
+          navigate(url);
+        }
+      }
       setIsDragging(false);
     };
 
