@@ -1,21 +1,30 @@
 @import "tailwindcss";
-@plugin "@tailwindcss/typography";
 
-:root {
-  font-family:
-    "Special Gothic", system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color: #505050;
-  background-color: #faf9f6;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@theme {
+  --color-primary: #505050;
+  --color-background: #fcf8f4;
 }
 
-html {
-  scrollbar-gutter: stable;
+@layer base {
+  html {
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    scrollbar-gutter: stable;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    color: var(--color-primary);
+    background-color: var(--color-background);
+    background-size: 16px 16px;
+    background-image:
+      linear-gradient(to right, #f1f1f1 1px, transparent 1px),
+      linear-gradient(to bottom, #f1f1f1 1px, transparent 1px);
+  }
+  h1 {
+    font-size: var(--text-xl);
+  }
+  h2 {
+    font-size: var(--text-lg);
+  }
 }

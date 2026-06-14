@@ -1,18 +1,30 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Home } from "./pages/Home";
-import { ProjectPage } from "./pages/ProjectPage";
+import { Layout } from "./components/Layout";
+import { InteractiveHome } from "./pages/InteractiveHome";
+import { Project } from "./pages/Project";
+import { SimpleHome } from "./pages/SimpleHome";
+import { useUIStore } from "./store/uiStore";
 
 gsap.registerPlugin(useGSAP);
 
 export function App() {
+  const interactiveMode = useUIStore((s) => s.interactiveMode);
+  const isMobile = useUIStore((s) => s.isMobile);
+  const showInteractive = isMobile ? false : interactiveMode;
+
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/projects/:projectPath" element={<ProjectPage />} />
-      </Routes>
+      <Layout>
+        <Routes>
+          <Route
+            path="/"
+            element={showInteractive ? <InteractiveHome /> : <SimpleHome />}
+          />
+          <Route path="/:project" element={<Project />} />
+        </Routes>
+      </Layout>
     </BrowserRouter>
   );
 }

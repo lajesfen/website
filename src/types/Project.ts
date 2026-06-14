@@ -1,10 +1,9 @@
-export interface ProjectProps {
-  path: string;
+export interface Project {
   title: string;
   description: string;
-  description_large?: string;
   image_url: string;
-  url_repo?: string;
-  url_demo?: string;
-  date: Date;
+  url_repo: string | null;
+  url_demo: string | null;
+  date: string;
+  path: string;
 }
