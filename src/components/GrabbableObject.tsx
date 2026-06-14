@@ -91,7 +91,7 @@ export const GrabbableObject = ({
 
   return (
     <div
-      className="fixed select-none"
+      className="fixed select-none animate-in"
       style={{
         top: `${position.top * 100}%`,
         left: `${position.left * 100}%`,

@@ -11,6 +11,8 @@ gsap.registerPlugin(useGSAP);
 
 export function App() {
   const interactiveMode = useUIStore((s) => s.interactiveMode);
+  const isMobile = useUIStore((s) => s.isMobile);
+  const showInteractive = isMobile ? false : interactiveMode;
 
   return (
     <BrowserRouter>
@@ -18,7 +20,7 @@ export function App() {
         <Routes>
           <Route
             path="/"
-            element={interactiveMode ? <InteractiveHome /> : <SimpleHome />}
+            element={showInteractive ? <InteractiveHome /> : <SimpleHome />}
           />
           <Route path="/:project" element={<Project />} />
         </Routes>

@@ -1,21 +1,38 @@
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 import { useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import { useNavigate, useParams } from "react-router-dom";
 import rehypeRaw from "rehype-raw";
-import GitHubButton from "../assets/github-button.webp";
-import LeftButton from "../assets/left-button.webp";
-import OpenButton from "../assets/open-button.webp";
+import GitHubButton from "../assets/icons/github-button.webp";
+import LeftButton from "../assets/icons/left-button.webp";
+import OpenButton from "../assets/icons/open-button.webp";
 import { Button } from "../components/Button";
 import { LabeledObject } from "../components/LabeledObject";
 import projects from "../data/projects.json";
 import { formatDate } from "../utils/date";
 
 export function Project() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const imgRef = useRef<HTMLImageElement>(null);
+
   const navigate = useNavigate();
 
-  const imgRef = useRef<HTMLImageElement>(null);
   const { project } = useParams();
   const data = projects.find((p) => p.path === project);
+
+  useGSAP(
+    () => {
+      gsap.from(".animate-in", {
+        opacity: 0,
+        y: 16,
+        duration: 0.5,
+        ease: "power2.out",
+        stagger: 0.08,
+      });
+    },
+    { scope: containerRef },
+  );
 
   if (!data) {
     return (
@@ -39,17 +56,20 @@ export function Project() {
   }
 
   return (
-    <div className="w-full max-w-2xl flex flex-col items-center px-6 mt-[24vh] mb-[12vh]">
+    <div
+      ref={containerRef}
+      className="w-full max-w-2xl flex flex-col items-center px-6 mt-[24vh] mb-[12vh]"
+    >
       <div className="flex flex-col gap-6">
         <img
-          src={"../assets/" + data.image_url}
+          src={"../assets/icons/" + data.image_url}
           alt={data.title}
-          className="w-24 h-24 select-none shrink-0 rounded-2xl border-4 border-white"
+          className="w-24 h-24 select-none shrink-0 rounded-2xl border-4 border-white animate-in"
           style={{
             filter: "drop-shadow(0 4px 4px rgba(0,0,0,0.25))",
           }}
         />
-        <div className="flex flex-col w-full gap-1">
+        <div className="flex flex-col w-full gap-1 animate-in">
           <div className="flex flex-row justify-between items-center">
             <div className="flex flex-row gap-3 items-center">
               <LabeledObject label="Go Back">
@@ -95,26 +115,26 @@ export function Project() {
           rehypePlugins={[rehypeRaw]}
           components={{
             p: ({ children }) => (
-              <p className="text-base leading-relaxed">{children}</p>
+              <p className="text-base leading-relaxed animate-in">{children}</p>
             ),
             h1: ({ children }) => (
-              <div className="font-medium uppercase border-t border-[#ccc] pt-3">
+              <div className="font-medium uppercase border-t border-[#ccc] pt-3 animate-in">
                 {children}
               </div>
             ),
             h2: ({ children }) => (
-              <div className="font-medium uppercase">{children}</div>
+              <div className="font-medium uppercase animate-in">{children}</div>
             ),
             strong: ({ children }) => (
               <span className="font-medium">{children}</span>
             ),
-            hr: () => <div className="border-t border-[#aaa]" />,
+            hr: () => <div className="border-t border-[#aaa] animate-in" />,
             a: ({ href, children }) => (
               <a
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="underline underline-offset-2"
+                className="underline underline-offset-2 decoration-dotted"
               >
                 {children}
               </a>
@@ -124,7 +144,7 @@ export function Project() {
                 ref={imgRef}
                 src={src}
                 alt={alt}
-                className="w-full mx-auto my-4 rounded-lg"
+                className="w-full mx-auto my-4 rounded-lg animate-in"
                 onLoad={(e) => {
                   const img = e.currentTarget;
                   const isVertical = img.naturalHeight > img.naturalWidth;
@@ -139,7 +159,7 @@ export function Project() {
                 autoPlay
                 loop
                 playsInline
-                className="w-full mx-auto my-4 rounded-lg"
+                className="w-full mx-auto my-4 rounded-lg animate-in"
               />
             ),
           }}

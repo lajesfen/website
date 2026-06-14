@@ -1,19 +1,37 @@
-import Email from "../assets/email.webp";
-import GitHub from "../assets/github.webp";
-import LinkedIn from "../assets/linkedin.webp";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { useRef } from "react";
+import Email from "../assets/icons/email.webp";
+import GitHub from "../assets/icons/github.webp";
+import LinkedIn from "../assets/icons/linkedin.webp";
 import { GrabbableObject } from "../components/GrabbableObject";
 import projects from "../data/projects.json";
 import type { Project } from "../types/Project";
 
 export function InteractiveHome() {
+  const containerRef = useRef<HTMLDivElement>(null);
   const getPosition = (index: number, total: number) => ({
     x: 0.5 + (index - (total - 1) / 2) * 0.15 + (Math.random() * 0.04 - 0.02),
     y: 0.5 + (Math.random() * 0.06 - 0.03),
     rotation: Math.random() * 20 - 10,
   });
 
+  useGSAP(
+    () => {
+      gsap.from(".animate-in", {
+        opacity: 0,
+        y: 16,
+        scale: 0.8,
+        duration: 0.5,
+        ease: "power2.out",
+        stagger: 0.08,
+      });
+    },
+    { scope: containerRef },
+  );
+
   return (
-    <div className="relative w-full h-screen">
+    <div ref={containerRef} className="relative w-full h-screen">
       {projects.map((project: Project, index) => (
         <GrabbableObject
           key={index}
@@ -24,7 +42,7 @@ export function InteractiveHome() {
           defaultRotation={getPosition(index, projects.length).rotation}
         >
           <img
-            src={"../assets/" + project.image_url}
+            src={"../assets/icons/" + project.image_url}
             alt={project.title}
             className="w-42 h-42 rounded-3xl border-3 border-white"
           />
