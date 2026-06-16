@@ -116,8 +116,8 @@ export const GrabbableObject = ({
         ref={object}
         onMouseDown={handleMouseDown}
         style={{
-          transform: `rotate(${defaultRotation}deg)`,
-          filter: "drop-shadow(0 2px 2px rgba(0,0,0,0.25))",
+          transform: `rotate(${defaultRotation}deg) translateZ(0)`,
+          filter: "drop-shadow(0 2px 3px rgba(0,0,0,0.25))",
           width: "max-content",
           height: "max-content",
         }}

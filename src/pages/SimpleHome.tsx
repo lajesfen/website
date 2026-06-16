@@ -71,10 +71,9 @@ export function SimpleHome() {
               <img
                 src={"../assets/icons/" + project.image_url}
                 alt={project.title}
-                className="w-11 h-11 select-none shrink-0 rounded-lg border-2 border-white group-hover:translate-x-1 transition-transform duration-200"
+                className="w-11 h-11 select-none shadow-md shrink-0 rounded-lg border-2 border-white group-hover:translate-x-1 transition-transform duration-200"
                 style={{
                   transform: `rotate(${getRotation()}deg)`,
-                  filter: "drop-shadow(0 2px 2px rgba(0,0,0,0.25))",
                 }}
               />
               <div className="w-full justify-between flex items-center">

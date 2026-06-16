@@ -19,7 +19,7 @@ export const Toolbar = () => {
               <img
                 src="../assets/icons/toggle-mode.webp"
                 alt="Toggle Mode"
-                className="w-10 h-10 drop-shadow-md cursor-pointer select-none shrink-0 rounded-lg"
+                className="w-10 h-10 shadow-md cursor-pointer select-none shrink-0 rounded-lg"
               />
             </button>
           </LabeledObject>

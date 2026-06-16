@@ -64,10 +64,7 @@ export function Project() {
         <img
           src={"../assets/icons/" + data.image_url}
           alt={data.title}
-          className="w-24 h-24 select-none shrink-0 rounded-2xl border-4 border-white animate-in"
-          style={{
-            filter: "drop-shadow(0 4px 4px rgba(0,0,0,0.25))",
-          }}
+          className="w-24 h-24 select-none shadow-md shrink-0 rounded-2xl border-4 border-white animate-in"
         />
         <div className="flex flex-col w-full gap-1 animate-in">
           <div className="flex flex-row justify-between items-center">
@@ -148,7 +145,7 @@ export function Project() {
                 onLoad={(e) => {
                   const img = e.currentTarget;
                   const isVertical = img.naturalHeight > img.naturalWidth;
-                  img.classList.add(isVertical ? "max-w-2/5" : "");
+                  img.classList.add(isVertical ? "max-w-2/5" : "w-full");
                 }}
               />
             ),
