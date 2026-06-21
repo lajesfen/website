@@ -1,12 +1,12 @@
 [
     {
-        "title": "Bones, Camera, Action!",
-        "description": "**Bones, Camera, Action!** is a web-based motion capture experiment built with [Next.js](https://nextjs.org/), [Three.js](https://threejs.org/) (via [React Three Fiber](https://r3f.docs.pmnd.rs/)), and [MediaPipe](https://ai.google.dev/edge/mediapipe/solutions/guide).\n\nThe application captures the user's pose in real time using MediaPipe's Pose Landmarker. Landmark data is streamed directly into the Three.js scene, where each tracked joint is mapped to a corresponding bone in a 3D rig. Movements are applied live to a pre-rigged character mesh, effectively turning the browser into a simple motion capture system.\n\nThe 3D model must be rigged using [Mixamo](https://www.mixamo.com/), as the bone mapping relies on specific naming conventions. By leveraging MediaPipe for pose estimation, the system requires no external sensors or markers, making it a fully browser-based mocap solution.\n\n![Bones, Camera, Action! Demo](/assets/demo/bones-camera-action-demo.gif)",
-        "image_url": "bones-camera-action.webp",
-        "url_repo": "https://github.com/lajesfen/CS4016-motion-transfer",
-        "url_demo": "https://cs4016-motion-transfer.vercel.app/",
-        "date": "2025-06-24 11:00:00",
-        "path": "bones-camera-action"
+        "title": "Goose Tales",
+        "description": "**Goose Tales** is an _in-progress_ browser-based MMO inspired by the social experiences of classic Flash games. Built with [Pixi.js](https://pixijs.com), [Express](https://expressjs.com/en/), and [Socket.io](https://socket.io), the project aims to recreate the accessibility of early web games while leveraging modern web technologies and a custom multiplayer architecture.\n\nThe application renders a real-time 2D world using Pixi.js and employs an authoritative server model to manage player connections, entity state, and multiplayer interactions. Communication between clients and the server is performed through WebSockets, enabling real-time synchronization of player actions and world events across all connected users.\n\nBeyond its technology stack, Goose Tales focuses on the engineering challenges of massively multiplayer browser games, including networking architecture, entity synchronization, event-driven systems, and scalable game state management. By combining modern frontend technologies with custom multiplayer systems, the project seeks to deliver a persistent, lightweight MMO experience that captures the spirit of classic Flash-era games while remaining entirely accessible from the browser.",
+        "image_url": "goose-tales.webp",
+        "url_repo": null,
+        "url_demo": null,
+        "date": "2026-02-03 11:00:00",
+        "path": "goose-tales"
     },
     {
         "title": "Go → x86 Compiler",
@@ -25,6 +25,15 @@
         "url_demo": null,
         "date": "2025-07-15 11:00:00",
         "path": "vr-band"
+    },
+    {
+        "title": "Bones, Camera, Action!",
+        "description": "**Bones, Camera, Action!** is a web-based motion capture application built with [Next.js](https://nextjs.org/), [Three.js](https://threejs.org/) (via [React Three Fiber](https://r3f.docs.pmnd.rs/)), and [MediaPipe](https://ai.google.dev/edge/mediapipe/solutions/guide).\n\nThe application captures the user's pose in real time using MediaPipe's Pose Landmarker. Landmark data is streamed directly into the Three.js scene, where each tracked joint is mapped to a corresponding bone in a 3D rig. Movements are applied live to a pre-rigged character mesh, effectively turning the browser into a simple motion capture system.\n\nThe 3D model must be rigged using [Mixamo](https://www.mixamo.com/), as the bone mapping relies on specific naming conventions. By leveraging MediaPipe for pose estimation, the system requires no external sensors or markers, making it a fully browser-based mocap solution.\n\n![Bones, Camera, Action! Demo](/assets/demo/bones-camera-action-demo.gif)",
+        "image_url": "bones-camera-action.webp",
+        "url_repo": "https://github.com/lajesfen/CS4016-motion-transfer",
+        "url_demo": "https://cs4016-motion-transfer.vercel.app/",
+        "date": "2025-06-24 11:00:00",
+        "path": "bones-camera-action"
     },
     {
         "title": "Poke-Maps",
