@@ -4,11 +4,10 @@ import { LabeledObject } from "./LabeledObject";
 interface ButtonProps {
   url: string;
   label?: string;
-  size?: number;
   children: React.ReactNode;
 }
 
-export const Button = ({ url, label, size = 32, children }: ButtonProps) => {
+export const Button = ({ url, label, children }: ButtonProps) => {
   const navigate = useNavigate();
 
   return (
