@@ -3,6 +3,7 @@
 @theme {
   --color-primary: #505050;
   --color-background: #fcf8f4;
+  --shadow-inset-highlight: inset 0 2px 4px rgba(255,255,255,0.5);
 }
 
 @layer base {

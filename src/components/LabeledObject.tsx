@@ -2,13 +2,12 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef, useState } from "react";
 
-export const LabeledObject = ({
-  label,
-  children,
-}: {
+interface LabeledObjectProps {
   label?: string;
   children: React.ReactNode;
-}) => {
+}
+
+export const LabeledObject = ({ label, children }: LabeledObjectProps) => {
   const tooltip = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
 

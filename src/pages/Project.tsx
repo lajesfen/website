@@ -40,12 +40,7 @@ export function Project() {
         <h2 className="mb-4">Project Not Found</h2>
         <LabeledObject label="Go Back">
           <button
-            className="cursor-pointer select-none rounded-md p-1 items-center justify-center flex bg-[#F0EEEC] hover:bg-[#e1e1e1] border border-[#DCDCDC] transition-colors duration-150"
-            style={{
-              width: "32px",
-              height: "32px",
-              boxShadow: "inset 0 2px 4px rgba(255,255,255,0.5)",
-            }}
+            className="cursor-pointer select-none w-8 h-8 shadow-inset-highlight rounded-md p-1 items-center justify-center flex bg-[#F0EEEC] hover:bg-[#e1e1e1] border border-[#DCDCDC] transition-colors duration-150"
             onClick={() => navigate("/")}
           >
             <img src={LeftButton} alt="Go Back" className="w-full h-full" />
@@ -71,19 +66,10 @@ export function Project() {
             <div className="flex flex-row gap-3 items-center">
               <LabeledObject label="Go Back">
                 <button
-                  className="cursor-pointer select-none rounded-md p-1 items-center justify-center flex bg-[#F0EEEC] hover:bg-[#e1e1e1] border border-[#DCDCDC] transition-colors duration-150"
-                  style={{
-                    width: "32px",
-                    height: "32px",
-                    boxShadow: "inset 0 2px 4px rgba(255,255,255,0.5)",
-                  }}
+                  className="cursor-pointer select-none w-8 h-8 shadow-inset-highlight rounded-md p-1 items-center justify-center flex bg-[#F0EEEC] hover:bg-[#e1e1e1] border border-[#DCDCDC] transition-colors duration-150"
                   onClick={() => navigate("/")}
                 >
-                  <img
-                    src={LeftButton}
-                    alt="Go Back"
-                    className="w-full h-full"
-                  />
+                  <img src={LeftButton} alt="Go Back" className="w-5.5 h-5.5" />
                 </button>
               </LabeledObject>
               <h1 className="text-2xl font-medium">{data.title}</h1>
@@ -94,13 +80,13 @@ export function Project() {
                   <img
                     src={GitHubButton}
                     alt="GitHub"
-                    className="w-full h-full"
+                    className="w-5.5 h-5.5"
                   />
                 </Button>
               )}
               {data.url_demo && (
                 <Button url={data.url_demo} label="Open">
-                  <img src={OpenButton} alt="Open" className="w-full h-full" />
+                  <img src={OpenButton} alt="Open" className="w-5.5 h-5.5" />
                 </Button>
               )}
             </div>

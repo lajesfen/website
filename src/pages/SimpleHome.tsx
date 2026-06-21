@@ -45,17 +45,13 @@ export function SimpleHome() {
             url="https://www.linkedin.com/in/luciano-aguirre-jesfen/"
             label="LinkedIn"
           >
-            <img
-              src={LinkedInButton}
-              alt="LinkedIn"
-              className="w-full h-full"
-            />
+            <img src={LinkedInButton} alt="LinkedIn" className="w-5.5 h-5.5" />
           </Button>
           <Button url="https://github.com/lajesfen" label="GitHub">
-            <img src={GitHubButton} alt="GitHub" className="w-full h-full" />
+            <img src={GitHubButton} alt="GitHub" className="w-5.5 h-5.5" />
           </Button>
           <Button url="mailto:lajesfen@gmail.com" label="Email">
-            <img src={EmailButton} alt="Email" className="w-full h-full" />
+            <img src={EmailButton} alt="Email" className="w-5.5 h-5.5" />
           </Button>
         </div>
       </div>

@@ -32,22 +32,26 @@ export function InteractiveHome() {
 
   return (
     <div ref={containerRef} className="relative w-full h-screen">
-      {projects.map((project: Project, index) => (
-        <GrabbableObject
-          key={index}
-          label={project.title}
-          url={project.path}
-          defaultX={getPosition(index, projects.length).x}
-          defaultY={getPosition(index, projects.length).y}
-          defaultRotation={getPosition(index, projects.length).rotation}
-        >
-          <img
-            src={"../assets/icons/" + project.image_url}
-            alt={project.title}
-            className="w-42 h-42 rounded-3xl border-3 border-white"
-          />
-        </GrabbableObject>
-      ))}
+      {projects.map((project: Project, index) => {
+        const position = getPosition(index, projects.length);
+
+        return (
+          <GrabbableObject
+            key={project.path || index}
+            label={project.title}
+            url={project.path}
+            defaultX={position.x}
+            defaultY={position.y}
+            defaultRotation={position.rotation}
+          >
+            <img
+              src={"../assets/icons/" + project.image_url}
+              alt={project.title}
+              className="w-42 h-42 rounded-3xl border-3 border-white"
+            />
+          </GrabbableObject>
+        );
+      })}
 
       {/* Media Icons */}
       <GrabbableObject

@@ -3,6 +3,15 @@ import gsap from "gsap";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+interface GrabbableObjectProps {
+  label?: string;
+  url?: string;
+  defaultX?: number;
+  defaultY?: number;
+  defaultRotation?: number;
+  children?: React.ReactNode;
+}
+
 export const GrabbableObject = ({
   label,
   url,
@@ -10,14 +19,7 @@ export const GrabbableObject = ({
   defaultY = 0.5,
   defaultRotation = 0,
   children,
-}: {
-  label?: string;
-  url?: string;
-  defaultX?: number;
-  defaultY?: number;
-  defaultRotation?: number;
-  children?: React.ReactNode;
-}) => {
+}: GrabbableObjectProps) => {
   const object = useRef<HTMLDivElement>(null);
   const tooltip = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ top: defaultY, left: defaultX });
@@ -31,7 +33,7 @@ export const GrabbableObject = ({
       gsap.to(
         object.current,
         isDragging
-          ? { scale: 1.2, y: -12, duration: 0.1 }
+          ? { scale: 1.1, y: -12, duration: 0.1 }
           : { scale: 1, y: 0, duration: 0.2 },
       );
     },
