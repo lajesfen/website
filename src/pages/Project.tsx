@@ -137,7 +137,7 @@ export function Project() {
             ),
             video: ({ src }) => (
               <video
-                controls={true}
+                controls={false}
                 src={src}
                 autoPlay
                 loop

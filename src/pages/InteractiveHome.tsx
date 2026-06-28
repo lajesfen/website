@@ -47,7 +47,7 @@ export function InteractiveHome() {
             <img
               src={"../assets/icons/" + project.image_url}
               alt={project.title}
-              className="w-42 h-42 rounded-3xl border-3 border-white"
+              className="w-36 h-36 rounded-3xl border-3 border-white"
             />
           </GrabbableObject>
         );
