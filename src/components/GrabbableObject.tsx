@@ -6,38 +6,54 @@ import { useNavigate } from "react-router-dom";
 interface GrabbableObjectProps {
   label?: string;
   url?: string;
-  defaultX?: number;
-  defaultY?: number;
+  defaultPosition?: { x: number, y: number };
   defaultRotation?: number;
   children?: React.ReactNode;
 }
 
+let topZIndex = 1;
 export const GrabbableObject = ({
   label,
   url,
-  defaultX = 0.5,
-  defaultY = 0.5,
+  defaultPosition = { x: 0.5, y: 0.5 },
   defaultRotation = 0,
   children,
 }: GrabbableObjectProps) => {
   const object = useRef<HTMLDivElement>(null);
   const tooltip = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ top: defaultY, left: defaultX });
+  const [position, setPosition] = useState({ x: defaultPosition.x, y: defaultPosition.y });
+  const [dragDirection, setDragDirection] = useState<"left" | "right" | null>(
+    null,
+  );
   const [isDragging, setIsDragging] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-
+  const [zIndex, setZIndex] = useState(0);
   const navigate = useNavigate();
 
   useGSAP(
     () => {
-      gsap.to(
-        object.current,
-        isDragging
-          ? { scale: 1.1, y: -12, duration: 0.1 }
-          : { scale: 1, y: 0, duration: 0.2 },
-      );
+      gsap.to(object.current, {
+        scale: isDragging ? 1.1 : 1,
+        y: isDragging ? -12 : 0,
+        duration: isDragging ? 0.15 : 0.3,
+        ease: "power2.out",
+      });
     },
     { scope: object, dependencies: [isDragging] },
+  );
+
+  useGSAP(
+    () => {
+      const tiltOffset =
+        dragDirection === "right" ? 12 : dragDirection === "left" ? -12 : 0;
+
+      gsap.to(object.current, {
+        rotation: defaultRotation + tiltOffset,
+        duration: 0.4,
+        ease: "power2.out",
+      });
+    },
+    { scope: object, dependencies: [dragDirection] },
   );
 
   useGSAP(
@@ -53,24 +69,37 @@ export const GrabbableObject = ({
     { dependencies: [isHovered, isDragging] },
   );
 
+  const bringToFront = () => {
+    topZIndex += 1;
+    setZIndex(topZIndex);
+  };
+
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     const startX = e.clientX;
     const startY = e.clientY;
-    const startTop = position.top;
-    const startLeft = position.left;
+    const startPos = position;
+    let lastX = e.clientX;
     let hasMoved = false;
-
+    let direction: "left" | "right" | null = null;
     setIsDragging(true);
+    bringToFront();
 
     const handleMouseMove = (e: MouseEvent) => {
-      const deltaY = e.clientY - startY;
       hasMoved = true;
+
+      const deltaX = e.clientX - lastX;
+      if (deltaX !== 0) {
+        const newDirection = deltaX > 0 ? "right" : "left";
+        if (newDirection !== direction) {
+          direction = newDirection;
+          setDragDirection(direction);
+        }
+      }
+      lastX = e.clientX;
+
       setPosition({
-        top: Math.min(Math.max(startTop + deltaY / window.innerHeight, 0), 1),
-        left: Math.min(
-          Math.max(startLeft + (e.clientX - startX) / window.innerWidth, 0),
-          1,
-        ),
+        x: startPos.x + (e.clientX - startX),
+        y: startPos.y + (e.clientY - startY),
       });
     };
 
@@ -78,13 +107,12 @@ export const GrabbableObject = ({
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseup", handleMouseUp);
       if (!hasMoved && url) {
-        if (url.startsWith("http") || url.startsWith("mailto:")) {
-          window.open(url, "_blank");
-        } else {
-          navigate(url);
-        }
+        url.startsWith("http") || url.startsWith("mailto:")
+          ? window.open(url, "_blank")
+          : navigate(url);
       }
       setIsDragging(false);
+      setDragDirection(null);
     };
 
     window.addEventListener("mousemove", handleMouseMove);
@@ -95,12 +123,13 @@ export const GrabbableObject = ({
     <div
       className="fixed select-none animate-in"
       style={{
-        top: `${position.top * 100}%`,
-        left: `${position.left * 100}%`,
-        translate: "-50% -50%",
+        top: "50%",
+        left: "50%",
+        transform: `translate(-50%, -50%) translate(${position.x}px, ${position.y}px)`,
         cursor: isDragging ? "grabbing" : "grab",
         width: "max-content",
         height: "max-content",
+        zIndex: zIndex,
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -118,8 +147,9 @@ export const GrabbableObject = ({
         ref={object}
         onMouseDown={handleMouseDown}
         style={{
-          transform: `rotate(${defaultRotation}deg) translateZ(0)`,
-          filter: "drop-shadow(0 2px 3px rgba(0,0,0,0.25))",
+          filter: isDragging
+            ? "drop-shadow(0 6px 6px rgba(0,0,0,0.25))"
+            : "drop-shadow(0 2px 3px rgba(0,0,0,0.25))",
           width: "max-content",
           height: "max-content",
         }}

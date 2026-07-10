@@ -10,17 +10,26 @@ import type { Project } from "../types/Project";
 
 export function InteractiveHome() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const getPosition = (index: number, total: number) => ({
-    x: 0.5 + (index - (total - 1) / 2) * 0.15 + (Math.random() * 0.04 - 0.02),
-    y: 0.5 + (Math.random() * 0.06 - 0.03),
-    rotation: Math.random() * 20 - 10,
-  });
+  const getPosition = (index: number, total: number) => {
+    const bounds = {
+      x: [-420, 420],
+      y: [-20, 20],
+    };
+    const step = total > 1 ? (bounds.x[1] - bounds.x[0]) / (total - 1) : 0;
+    const baseX = bounds.x[0] + step * index;
+
+    return {
+      x: baseX,
+      y: bounds.y[0] + Math.random() * (bounds.y[1] - bounds.y[0]),
+      rotation: Math.random() * 20 - 10,
+    };
+  };
 
   useGSAP(
     () => {
       gsap.from(".animate-in", {
         opacity: 0,
-        y: 16,
+        y: "+=20",
         scale: 0.8,
         duration: 0.5,
         ease: "power2.out",
@@ -40,8 +49,7 @@ export function InteractiveHome() {
             key={project.path || index}
             label={project.title}
             url={project.path}
-            defaultX={position.x}
-            defaultY={position.y}
+            defaultPosition={{ x: position.x, y: position.y }}
             defaultRotation={position.rotation}
           >
             <img
@@ -55,8 +63,7 @@ export function InteractiveHome() {
 
       {/* Media Icons */}
       <GrabbableObject
-        defaultX={0.86}
-        defaultY={0.85}
+        defaultPosition={{ x: 360, y: 300 }}
         defaultRotation={-15}
         label="LinkedIn"
         url="https://www.linkedin.com/in/luciano-aguirre-jesfen/"
@@ -64,8 +71,7 @@ export function InteractiveHome() {
         <img src={LinkedIn} alt="LinkedIn" className="w-12 h-12" />
       </GrabbableObject>
       <GrabbableObject
-        defaultX={0.9}
-        defaultY={0.83}
+        defaultPosition={{ x: 420, y: 280 }}
         defaultRotation={15}
         label="GitHub"
         url="https://github.com/lajesfen"
@@ -73,8 +79,7 @@ export function InteractiveHome() {
         <img src={GitHub} alt="GitHub" className="w-12 h-12" />
       </GrabbableObject>
       <GrabbableObject
-        defaultX={0.94}
-        defaultY={0.85}
+        defaultPosition={{ x: 480, y: 320 }}
         defaultRotation={0}
         label="Email"
         url="mailto:lajesfen@gmail.com"

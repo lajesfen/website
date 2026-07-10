@@ -12,15 +12,21 @@ export const Toolbar = () => {
         <div className="fixed top-1/2 right-3 transform -translate-y-1/2 flex flex-col gap-3 p-2 z-20 bg-[#EDEDED] border border-[#DCDCDC] shadow-inset-highlight rounded-xl">
           <LabeledObject label="Toggle Mode">
             <button onClick={toggleMode}>
-              <div className="w-10 h-10 flex items-center justify-center shadow-md rounded-lg overflow-hidden">
-                <img
-                  src="../assets/icons/toggle-mode.webp"
-                  alt="Toggle Mode"
-                  className="w-full h-full cursor-pointer select-none"
+              <div className="w-10 h-10 flex cursor-pointer items-center bg-[#FCFAFA] justify-center shadow-md rounded-lg overflow-hidden">
+                <div
+                  className="relative w-3/5 h-1/3 rounded-full transition-colors duration-300"
                   style={{
-                    transform: isInteractiveMode ? "scaleX(1)" : "scaleX(-1)",
+                    backgroundColor: isInteractiveMode ? "#434343" : "#B0B0B0",
                   }}
-                />
+                >
+                  <div
+                    className="absolute w-2 h-2 top-1/2 rounded-full bg-white transition-all duration-150"
+                    style={{
+                      left: isInteractiveMode ? "calc(100% - 10px)" : "2px",
+                      transform: "translateY(-50%)",
+                    }}
+                  />
+                </div>
               </div>
             </button>
           </LabeledObject>

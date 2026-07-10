@@ -17,10 +17,10 @@
   body {
     color: var(--color-primary);
     background-color: var(--color-background);
-    background-size: 16px 16px;
+    background-size: 22px 22px;
     background-image:
-      linear-gradient(to right, #f1f1f1 1px, transparent 1px),
-      linear-gradient(to bottom, #f1f1f1 1px, transparent 1px);
+      linear-gradient(to right, #f0f0f0 1px, transparent 1px),
+      linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
   }
   h1 {
     font-size: var(--text-xl);

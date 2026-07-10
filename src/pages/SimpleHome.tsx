@@ -35,10 +35,11 @@ export function SimpleHome() {
     >
       <div className="flex flex-col gap-4 mb-10">
         <p className="animate-in">
-          Experienced in Full-Stack Development, with a strong interest in
-          Computer Graphics and Human-Computer Interaction. Proficient in Mixed
-          Reality technologies and UX principles applied to interactive
-          environments.
+          Software Developer based in Lima, Peru, focused on building scalable
+          and interactive applications, with a strong interest in Computer
+          Graphics and Human-Computer Interaction. Experienced with FullStack
+          development, Mixed Reality technologies and UX principles for
+          interactive environments.
         </p>
         <div className="flex flex-row gap-1 animate-in">
           <Button
@@ -67,7 +68,7 @@ export function SimpleHome() {
               <img
                 src={"../assets/icons/" + project.image_url}
                 alt={project.title}
-                className="w-11 h-11 select-none shadow-md shrink-0 rounded-lg border-2 border-white group-hover:translate-x-1 transition-transform duration-200"
+                className="w-11 h-11 select-none shadow-md group-hover:rotate-15 shrink-0 rounded-lg border-2 border-white group-hover:translate-x-1 transition-transform duration-200"
                 style={{
                   transform: `rotate(${getRotation()}deg)`,
                 }}
