@@ -11,7 +11,7 @@ export const Toolbar = () => {
       {!isMobile && (
         <div className="fixed top-1/2 right-3 transform -translate-y-1/2 flex flex-col gap-3 p-2 z-20 bg-[#EDEDED] border border-[#DCDCDC] shadow-inset-highlight rounded-xl">
           <LabeledObject label="Toggle Mode">
-            <button onClick={toggleMode}>
+            <button onClick={toggleMode} aria-label="Toggle Mode">
               <div className="w-10 h-10 flex cursor-pointer items-center bg-[#FCFAFA] justify-center shadow-md rounded-lg overflow-hidden">
                 <div
                   className="relative w-3/5 h-1/3 rounded-full transition-colors duration-300"
