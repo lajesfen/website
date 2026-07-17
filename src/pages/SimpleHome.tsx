@@ -11,8 +11,6 @@ import { formatDate } from "../utils/date";
 
 export function SimpleHome() {
   const containerRef = useRef<HTMLDivElement>(null);
-
-  const getRotation = () => Math.random() * 20 - 10;
   const navigate = useNavigate();
 
   useGSAP(
@@ -68,10 +66,7 @@ export function SimpleHome() {
               <img
                 src={"../assets/icons/" + project.image_url}
                 alt={project.title}
-                className="w-11 h-11 select-none shadow-md group-hover:rotate-15 shrink-0 rounded-lg border-2 border-white group-hover:translate-x-1 transition-transform duration-200"
-                style={{
-                  transform: `rotate(${getRotation()}deg)`,
-                }}
+                className="w-11 h-11 select-none shadow-md group-hover:rotate-10 shrink-0 rounded-lg border-2 border-white group-hover:translate-x-1 transition-transform duration-200"
               />
               <div className="w-full justify-between flex items-center">
                 <h2 className="font-medium text-base group-hover:translate-x-1 transition-transform duration-200">

@@ -127,7 +127,7 @@ export function Project() {
                 ref={imgRef}
                 src={src}
                 alt={alt}
-                className="w-full mx-auto my-4 rounded-lg animate-in"
+                className="w-full mx-auto rounded-lg animate-in"
                 onLoad={(e) => {
                   const img = e.currentTarget;
                   const isVertical = img.naturalHeight > img.naturalWidth;
@@ -142,7 +142,7 @@ export function Project() {
                 autoPlay
                 loop
                 playsInline
-                className="w-full mx-auto my-4 rounded-lg animate-in"
+                className="w-full mx-auto rounded-lg animate-in"
               />
             ),
           }}

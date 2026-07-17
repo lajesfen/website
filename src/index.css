@@ -19,8 +19,8 @@
     background-color: var(--color-background);
     background-size: 22px 22px;
     background-image:
-      linear-gradient(to right, #f0f0f0 1px, transparent 1px),
-      linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
+      linear-gradient(to right, #d8d8d838 1px, transparent 1px),
+      linear-gradient(to bottom, #d8d8d838 1px, transparent 1px);
   }
   h1 {
     font-size: var(--text-xl);
